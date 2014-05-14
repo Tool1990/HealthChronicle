@@ -9,77 +9,58 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
+		<div class="common-content" id="login">
+			<div id="registration">
+				<div id="template">
+					<span id="logo2">Mediplatt</span>
+				</div>
+				<h3>Der Beste Weg ihre Gesundheit zu überwachen</h3>
+			</div>
+			<h:form id="form">
+				<p:panel id="panel" header="Registration">
+					<p:messages id="msgs" />
+					<h:panelGrid columns="3">
+						<h:outputLabel for="email" value="E-mail: *" />
+						<p:inputText id="email" value="#{registerBean.name}" tabindex="1"
+							required="true" label="E-mail" placeholder="MaxMuster@gmail.com"
+							validatorMessage="Ungültige E-Mail-Adresse, bitte versuchen Sie es erneut">
+							<f:validateLength minimum="3" />
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							<f:validateRequired />
+						</p:inputText>
+						<p:message for="email" display="icon" />
+						<h:outputLabel for="password" value="Passwort: *" />
+						<p:password id="password" value="#{registerBean.password}"
+							tabindex="2" label="Password" required="true"
+							placeholder="min. 6 Zeichen a-z,0-9">
+							<f:validateLength minimum="6" />
+							<f:validateRequired />
+							<p:ajax update="msgPassword" event="keyup" />
+						</p:password>
+						<p:message for="password" id="msgPassword" display="icon" />
+					</h:panelGrid>
+					<fieldset>
+						<legend>Freiwillige Daten zu ihrer Person</legend>
 
-<div class="common-content" id="login">
-		<div id="registration">
-			    
-	 		<div id="template">
-    			<span id="logo2" >Mediplatt</span>
- 			</div>
-				<h3> Der Beste Weg ihre Gesundheit zu überwachen</h3>
+						<h:selectOneRadio value="#{registerBean.sex}">
+							<f:selectItem itemLabel="Männlich" itemValue="männlich" />
+							<f:selectItem itemLabel="Weiblich" itemValue="weiblich" />
+						</h:selectOneRadio>
+						<label>Geburtstag:</label>
+						<p:calendar value="#{registerBean.date}" pattern="dd.MM.yyyy" />
+						<label>Gewicht:</label>
+						<p:inputText value="#{registerBean.gewicht}" required="false"
+							placeholder="in Kilogramm"></p:inputText>
+						<label>Größe:</label>
+						<p:inputText value="#{registerBean.groesse}" required="false"
+							placeholder="in Zentimeter"></p:inputText>
+					</fieldset>
+					<p:commandButton id="btn" value="Registrieren" update="panel"
+						action="#{registerBean.registerUser()}" />
+				</p:panel>
+			</h:form>
 		</div>
-
-        <h:form id="form">  
-  
-   			<p:panel id="panel" header="Registration">  
-  
-       			<p:messages id="msgs"/>  
-  
-        			<h:panelGrid columns="3">  
-            		<h:outputLabel for="email" value="E-mail: *" />  
-            		<p:inputText id="email" value="#{registerBean.name}" tabindex="1" required="true" label="E-mail" placeholder="MaxMuster@gmail.com" validatorMessage="Ungültige E-Mail-Adresse, bitte versuchen Sie es erneut">  
-                		<f:validateLength minimum="3" /> 
-                		 
-                		<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                		<f:validateRequired/>
-            		</p:inputText>  
-            		<p:message for="email" display="icon"/>
-            		
-            		<h:outputLabel for="password" value="Passwort: *" />  
-            		<p:password id="password" value="#{registerBean.password}" tabindex="2" label="Password" required="true" placeholder="min. 6 Zeichen a-z,0-9">  
-                		<f:validateLength minimum="6" /> 
-                		<f:validateRequired/>
-                		 
-                	<p:ajax update="msgPassword" event="keyup" />  
-            		</p:password>  
-            		<p:message for="password" id="msgPassword" display="icon"/>  
-
-        			</h:panelGrid>  
-        		<br></br>	
-
-	<fieldset>
-	
-  	<legend>Freiwillige Daten zu ihrer Person</legend>
-  	
-	 <h:selectOneRadio value="#{registerBean.sex}" >
-   		<f:selectItem itemLabel="Männlich" itemValue="männlich" /> 
-   		<f:selectItem itemLabel="Weiblich" itemValue="weiblich" />
-	</h:selectOneRadio>
-		
-    <label>Geburtstag:</label><br></br>
-    <p:calendar value="#{registerBean.date}" pattern="dd.MM.yyyy" /><br></br>
-    
-    <label>Gewicht:</label><br></br>
-    <p:inputText value="#{registerBean.gewicht}" required="false" placeholder="in Kilogramm"></p:inputText><br></br>
-        
-    <label>Größe:</label><br></br>
-    <p:inputText value="#{registerBean.groesse}" required="false" placeholder="in Zentimeter"></p:inputText><br></br>
-	</fieldset>	
-        			
-  		<p:commandButton id="btn" value="Registrieren" update="panel" action="#{registerBean.registerUser()}"/>  
-  					
-  					
-    		</p:panel>  
-  
-	</h:form>  
-	<br></br>
-	<br></br>
-	<br></br>
-	<br></br>
-	<br></br>
-	<br></br>
-	<br></br>
-</div>
-</ui:define>
+	</ui:define>
 </ui:composition>
 </html>

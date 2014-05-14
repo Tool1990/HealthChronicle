@@ -9,33 +9,31 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-
-<div class="common-content" id="login">
-        <h:form id="form">  
-  
-   			<p:panel id="panel" header="Login">  
-  
-       			<p:messages id="msgs"/>  
-  
-        			<h:panelGrid columns="3">  
-            		<h:outputLabel for="email" value="E-mail: *" />  
-            		<p:inputText id="email" value="#{loginBean.name}" tabindex="1" required="true" label="E-mail" placeholder="MaxMuster@gmail.com">  
-                		<f:validateLength minimum="3" />  
-            		</p:inputText>  
-            		<p:message for="email" display="icon"/>
-            		<h:outputLabel for="password" value="Passwort: *" />  
-            		<p:password id="password" value="#{loginBean.password}" tabindex="2" label="Password" required="true" placeholder="min. 6 Zeichen a-z,0-9">  
-                		<f:validateLength minimum="6" />  
-                	<p:ajax update="msgPassword" event="keyup" />  
-            		</p:password>  
-            		<p:message for="password" id="msgPassword" display="icon"/>  
-  
-        			</h:panelGrid>
-  					<p:commandButton id="btn" value="Login" update="panel" actionListener="#{loginBean.login}"/>  
-    		</p:panel>  
-  
-	</h:form>  
-</div>
-</ui:define>
+		<div class="common-content" id="login">
+			<h:form id="form">
+				<p:panel id="panel" header="Login">
+					<p:messages id="msgs" />
+					<h:panelGrid columns="3">
+						<h:outputLabel for="email" value="E-mail: *" />
+						<p:inputText id="email" value="#{loginBean.name}" tabindex="1"
+							required="true" label="E-mail" placeholder="MaxMuster@gmail.com">
+							<f:validateLength minimum="3" />
+						</p:inputText>
+						<p:message for="email" display="icon" />
+						<h:outputLabel for="password" value="Passwort: *" />
+						<p:password id="password" value="#{loginBean.password}"
+							tabindex="2" label="Password" required="true"
+							placeholder="min. 6 Zeichen a-z,0-9">
+							<f:validateLength minimum="6" />
+							<p:ajax update="msgPassword" event="keyup" />
+						</p:password>
+						<p:message for="password" id="msgPassword" display="icon" />
+					</h:panelGrid>
+					<p:commandButton id="btn" value="Login" update="panel"
+						actionListener="#{loginBean.login}" />
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
 </ui:composition>
 </html>
