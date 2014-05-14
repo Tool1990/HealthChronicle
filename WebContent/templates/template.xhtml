@@ -1,82 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-      
-      
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head>  
-  <title><ui:insert name="title">MediPlatt</ui:insert></title>  
-  <h:outputStylesheet name="css/template.css" />
-  <h:outputStylesheet name="css/story.css" />
-  <h:outputStylesheet name="css/buttons.css" />
-  <h:outputStylesheet name="css/login.css" />
-  <h:outputStylesheet name="css/registration.css" />  
-  <h:outputStylesheet name="css/admin.css" />  
-  <h:outputStylesheet name="css/chronicle.css" /> 
-  <h:outputStylesheet name="css/statistics.css" /> 
-  <h:outputStylesheet name="css/stories.css" />
-  <h:outputStylesheet name="css/options.css" /> 
-  <h:outputStylesheet name="css/menu.css" /> 
-  <h:outputStylesheet name="css/cont.css" />
-  <h:outputStylesheet name="css/about.css" />
-  <h:outputStylesheet name="css/haftung.css" />
-  <h:outputStylesheet name="css/impressum.css" />  
+<h:head>
+	<title><ui:insert name="title">Health Chronicle</ui:insert></title>
 </h:head>
 
-
-
 <h:body>
-
-<div id="header">
-  
-  <div id="header-content">
-    <h:link id="logo" value="MediPlatt" outcome="index.xhtml"></h:link>
-    <div id="nav"><ui:include src="../composites/header.xhtml"/></div>    
-  </div>
-
-</div>
-<div>
-	<ui:insert name="content"></ui:insert>
-</div>
-
-<!-- #FOOTER -->
-<div id="footer">      
-	<style type="text/css">
-		a.about:link {
-		color:white;
-		}
-		a.impressum:link {
-		color:white;
-		}
-		a.AGB:link {
-		color:white;
-		}
-	</style>            
-            <div id="fixed">
-               
-                  <ul>
-                     <li>
-                       Mediplatt &copy; 2014 
-                     </li>
-                     
-                     <li style="margin-left:9em">
-                        <a class="about" href="about.xhtml" >Über uns</a>
-                     </li>
-                     
-                     <li style="margin-left:1em">
-                        <a class="impressum" href="impressum.xhtml" >Impressum</a>
-                     </li>
-
-                     <li style="margin-left:1em">
-                        <a class="AGB" href="haftung.xhtml" >Haftungsausschluss</a>
-                     </li>
-
-                  </ul>
-               
-            </div>
-</div>
+	<div id="header">
+		<h:link id="logo" value="Health Chronicle" outcome="index.xhtml"></h:link>
+		<div id="nav">
+			<ui:include src="../composites/header.xhtml" />
+		</div>
+	</div>
+	<div>
+		<ui:insert name="content"></ui:insert>
+	</div>
+	<div id="footer">
+		<ul>
+			<li>Health Chronicle &copy; 2014</li>
+			<li><a class="impressum" href="impressum.xhtml">Impressum</a></li>
+		</ul>
+	</div>
 </h:body>
 </html>
