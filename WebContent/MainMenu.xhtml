@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"  >
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+	
+	<div style="width:100%;">
+		<div id="links" style="float:left;width:55%">
+	 		<div class="navigation" id ="menu" style="width:550px;float:right;" >
+			  	<br />
+			  	<br />
+			  	<br />
+				<div id="template">
+		    		<span id="logo2" >Hauptmenü</span>
+		 		</div>
+			  	<br />
+			 	<strong>Chronik:</strong><br/>
+			 	<br/>
+			  	Hier können Sie ihre Krankheitsgeschichte erstellen, verfolgen und ändern.<br/>
+			  	<br/>
+			  	<strong>Suche:</strong><br/>
+			  	<br/>
+			  	Hier können sie nach Krankheiten oder Chroniken von Ihnen und Anderen suchen.<br/>
+			  	<br />
+		    	<li><a href="chronicle.xhtml?faces-redirect=true" title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten">Chronik</a></li>
+		    	<li><a href="abcSuche.xhtml?faces-redirect=true" title="Hier können Sie nach Krankheiten suchen">Suche</a></li>
+			</div>
+		</div>
+  		  	
+		<div id="rechts" style="float:right;margin-right:15px;">  	
+ 				<div style="margin-bottom: 5px; margin-top: 5px; background-color: #ffffff;">
+ 					<iframe src="http://www.nachrichten.de/widget.html?feed=gesundheit&amp;amount=90&amp;teasers=true&amp;thumbnails=true&amp;width=400&amp;height=600&amp;title=Gesundheits+News" frameBorder="10" style="border: none; width: 400px; min-height: 37.500em;">
+ 					</iframe>
+ 					<div id="nachrichtenWidgetFooter" style="border: none; height: 2em; padding: 0px; margin: 0px; font-size: 0.688em; width: 22.813em;">
+ 						<div style="padding-top: 5px; width: 98%; text-align: right;">
+ 							<a href="http://www.nachrichten.de/widget/" style="text-decoration: none; color: #666666; font-family: Arial;"></a>
+	 					</div>
+ 					</div>
+ 				</div>
+ 			</div>	
+		</div>
+
+	</ui:define>
+</ui:composition>
+
+</html>

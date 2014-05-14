@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<div class="story">
+		<h:form> 
+		<p:growl id="growl" showDetail="true"/>   
+		<p:panel id="options-panel" header="Wählen Sie den Art des Eintrags" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{chronicleBean.handleCloseOptions}" update="growl" />
+       		
+       		<div style="height:12px"></div>
+       		<div style="text-align:center">
+       		
+       		<h:commandLink action="#{chronicleBean.showSymptomForm()}"> 
+   				<h:graphicImage value="resources/img/symptom.gif" />
+   			</h:commandLink>
+   			<div style="display:inline">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+   			<h:commandLink action="#{chronicleBean.showDiagnosisForm()}"> 
+   				<h:graphicImage value="resources/img/diagnosis.gif" />
+   			</h:commandLink>
+   			<div style="display:inline">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+   			<h:commandLink action="#{chronicleBean.showActionForm()}"> 
+   				<h:graphicImage value="resources/img/action.gif" />
+   			</h:commandLink>
+          	</div>	
+   		</p:panel> 
+   	 	</h:form>
+	</div>  
+</ui:composition>
+	
+</html>

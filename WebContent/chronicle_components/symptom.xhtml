@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<div class="story">
+		<h:form> 
+		<p:messages id="msgs"/>  
+		<p:panel id="symptome-panel" header="Symptom #{symptomBean.title}" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{symptomBean.deselectSymptom}"/>
+       		
+       		<h:outputLabel value="Wann aufgefallen? : "/>  
+    		<p:calendar value="#{symptomBean.date}" pattern="dd.MM.yyyy HH:mm" /> 
+       		
+       		<div style="height:20px"></div>  
+       		
+       		<h:outputLabel value="Symptom: " for="symptom" />  
+            <p:autoComplete id="symptom" value="#{symptomBean.term}" completeMethod="#{symptomBean.complete}">
+           		<f:validateRegex pattern="[a-zA-Z0-9 öäüßÖÄÜ]+"></f:validateRegex>
+                <p:ajax update="msgSymptom" event="keyup" />
+            </p:autoComplete>             
+            <p:watermark for="symptom" value="Symptom" />
+            <p:message id="msgSymptom" for="symptom" display="icon"/> 
+            
+            <div style="height:20px"></div>  
+            
+            <h:outputLabel value="Intensität: "/>           	       
+            <p:selectOneMenu id="intensity" value="#{symptomBean.intensity}">
+                <f:selectItems value="#{symptomBean.intensities}" />  
+                <p:ajax listener="#{symptomBean.intensityChange}" />
+            </p:selectOneMenu>  
+            <p:message for="intensity" display="icon"/>  
+           
+            <f:facet name="footer">  
+            	<p:commandButton id="btn" value="Speichern" update="symptome-panel" actionListener="#{symptomBean.save}"/> 
+       		</f:facet> 
+           
+   		</p:panel> 
+   	 	</h:form>
+	</div>
+</ui:composition>
+	
+</html>

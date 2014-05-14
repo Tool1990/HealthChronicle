@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<div class="story">
+		<h:form> 
+		<p:messages id="msgs"/>  
+		<p:panel id="action-panel" header="Behandlung #{actionBean.title}" closable="true" closeSpeed="500" widgetVar="panel">  
+  			
+  			<p:ajax event="close" listener="#{actionBean.deselectAction}"/>
+       		
+       		<h:outputLabel value="Wann? : "/>  
+    		<p:calendar value="#{actionBean.date}" pattern="dd.MM.yyyy HH:mm" /> 
+       		
+       		<div style="height:20px"></div>  
+       		
+       		<h:outputLabel value="Was: " for="action" />  
+            <p:autoComplete id="action" value="#{actionBean.action}" completeMethod="#{actionBean.complete}">
+           		<f:validateRegex pattern="[a-zA-Z0-9 öäüßÖÄÜ]+"></f:validateRegex>
+                <p:ajax update="msgAction" event="keyup" />
+            </p:autoComplete>             
+            <p:watermark for="action" value="Behandlung" />
+            <p:message id="msgAction" for="action" display="icon"/> 
+            
+            <div style="height:20px"></div>  
+            
+            <h:outputLabel value="Wie oft?: "/>           	       
+            <p:selectOneMenu id="period" value="#{actionBean.period}">
+                <f:selectItems value="#{actionBean.periods}" />  
+                <p:ajax listener="#{actionBean.periodChange}" />
+            </p:selectOneMenu>  
+            <p:message for="period" display="icon"/>  
+            
+            <div style="height:20px"></div>  
+            
+            <h:outputLabel value="Welche Menge?: " for="amount" />  
+            <p:inputText id="amount" value="#{actionBean.amount}" required="true">  
+                <f:validateRegex pattern="[a-zA-Z0-9.() öäüßÖÄÜ]+"></f:validateRegex>
+                <p:ajax update="msgAmount" event="keyup" />  
+            </p:inputText>            
+            <p:watermark for="amount" value="Menge" />
+            <p:message id="msgAmount" for="amount" display="icon"/>            
+            
+           
+            <f:facet name="footer">  
+            	<p:commandButton id="btn" value="Speichern" update="action-panel" actionListener="#{actionBean.save}"/> 
+       		</f:facet> 
+           
+   		</p:panel> 
+   	 	</h:form>
+	</div>    
+</ui:composition>
+	
+</html>

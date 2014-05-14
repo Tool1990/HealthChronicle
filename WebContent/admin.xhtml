@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+<ui:define name="content">
+
+<div class="common-content">
+<div id="user_table">
+	<h:form id="form_new_user">  
+  
+    <p:panel id="panel" header="User Anlegen">  
+  
+        <p:messages id="msgs"/>  
+  
+        <h:panelGrid columns="3">  
+            <h:outputLabel for="new_email" value="Email *" />  
+            <p:inputText id="new_email" value="#{adminBean.newEmail}" required="true" label="Email">  
+                <f:validateRegex pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
+                <p:ajax update="msgEmail" event="keyup" />   
+            </p:inputText>  
+            <p:message for="new_email" id="msgEmail" display="icon"/>  
+  
+            <h:outputLabel for="new_password" value="Password *" />  
+            <p:inputText id="new_password" value="#{adminBean.newPassword}" label="Password" required="true">  
+                <f:validateRegex pattern="^[a-zA-Z0-9_-]{6,18}$"></f:validateRegex> 
+                <p:ajax update="msgPassword" event="keyup" />  
+            </p:inputText>  
+            <p:message for="new_password" id="msgPassword" display="icon"/>
+            
+            <p:selectOneMenu id="new_role" value="#{adminBean.newRole}">  
+                <f:selectItem itemLabel="Wähle Role" itemValue="" />  
+                <f:selectItems value="#{adminBean.roles}" />  
+            </p:selectOneMenu>   
+  
+        </h:panelGrid>  
+  
+        <p:commandButton id="save_new_user" value="User speichern" update="panel :form_user_list" actionListener="#{adminBean.saveUser}"/>  
+    </p:panel>  
+  
+	</h:form>  
+	<div style="width:100%;height:10px"></div>
+	<h:form id="form_user_list">  
+     	<p:growl id="messages" showDetail="true"/>  
+  
+    	<p:dataTable id="dataTable" var="user" value="#{adminBean.users}" widgetVar="usersTable" editable="true" editMode="cell" rowKey="#{user.id}"
+            emptyMessage="Keine User gefunden" filteredValue="#{adminBean.filteredUsers}" selection="#{adminBean.selectedUsers}" style="width:100%" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">  
+  		
+  		<p:ajax event="cellEdit" listener="#{adminBean.onCellEdit}" update=":form_user_list:messages" />  
+  		
+        <f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="In allen Feldern suchen:" />  
+                <p:inputText id="globalFilter" onkeyup="usersTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet> 
+         
+  		<p:column selectionMode="multiple" style="width:2%" />  
+  		
+        <p:column id="nameColumn" filterBy="name"   
+                headerText="Email" footerText="Email"  
+                filterMatchMode="contains">
+            <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{user.name}" /></f:facet>  
+                   <f:facet name="input"><p:inputText id="nameInput" value="#{user.name}" style="width:96%"/></f:facet>  
+            </p:cellEditor>   
+        </p:column>  
+  
+        <p:column id="passwordColumn" filterBy="password"  
+                headerText="Password" footerText="Password"
+                filterMatchMode="contains">  
+            <p:cellEditor>  
+                <f:facet name="output"><h:outputText value="#{user.password}" /></f:facet>  
+                <f:facet name="input"><p:inputText value="#{user.password}" style="width:96%" label="Password"/></f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column id="roleColumn" filterBy="role"
+                headerText="Role" footerText="Role"  
+                filterOptions="#{adminBean.roleOptions}"  
+                filterMatchMode="exact">
+        	<p:cellEditor>  
+                <f:facet name="output"><h:outputText value="#{user.role}" /></f:facet>  
+                <f:facet name="input">  
+                    <h:selectOneMenu value="#{user.role}" style="width:100%">  
+                        <f:selectItems value="#{adminBean.roles}" var="rol" itemLabel="#{rol}" itemValue="#{rol}" />  
+                    </h:selectOneMenu>  
+                </f:facet>  
+            </p:cellEditor>
+        </p:column>
+        
+        <f:facet name="footer">  
+            <p:commandButton id="multiViewButton" value="Auswahl löschen" icon="ui-icon-trash"
+                             update=":form_user_list" actionListener="#{adminBean.deleteSelected}"/>  
+        </f:facet>  
+    </p:dataTable> 
+</h:form>
+</div>
+
+</div>	
+</ui:define>
+</ui:composition>
+</html>

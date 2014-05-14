@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+
+<div class="common-content" id="login">
+        <h:form>
+             <h:messages style="color:red"/>
+             <h style="color:red">Falscher Login-Name</h>
+        <div class="frame">
+			<div class="frame-header">
+				Melden Sie sich an
+			</div>
+			<div class="frame-body">
+				<table>
+					<tr>
+						<td>
+							Login
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputText styleClass="input-field" value="#{loginBean.name}" tabindex="1" label="Name" p:placeholder="bitte Login eingeben">
+								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
+								<f:validateRequired/>
+							</h:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Password <span id="forgot-password">(<h:link value="forgot it?" outcome="password-restoration.xhtml" tabindex="4"></h:link>)</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputSecret  styleClass="input-field" value="#{loginBean.password}" tabindex="2" label="Password" p:placeholder="bitte Password eingeben">
+								<f:validateLength minimum="3" />
+								<f:validateRegex pattern="[a-zA-Z0-9]*"/>
+								<f:validateRequired/>
+							</h:inputSecret>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="frame-footer">
+				<h:commandButton class="form-button" value="Log-In" action="#{loginBean.login()}" tabindex="3"></h:commandButton>
+			</div>		
+		</div>
+	</h:form>
+</div>
+</ui:define>
+</ui:composition>
+</html>
