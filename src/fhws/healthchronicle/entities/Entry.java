@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public abstract class Entry implements Comparable<Entry>
 {
-
 	// Variable
 	@Id
 	@GeneratedValue
@@ -116,7 +115,6 @@ public abstract class Entry implements Comparable<Entry>
 
 	public int compareTo(Entry entry)
 	{
-
 		int year = ((int) entry.getYear() - (int) this.year);
 		if (year != 0)
 		{

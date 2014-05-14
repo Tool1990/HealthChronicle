@@ -16,7 +16,7 @@ import javax.persistence.Query;
 
 import fhws.healthchronicle.entities.User;
 
-@ManagedBean(name = "loginBean")
+@ManagedBean
 @ViewScoped
 public class LoginBean {
 
