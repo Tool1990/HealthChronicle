@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 	<div class="story">
-		<h:form> 
-		<p:messages id="msgs"/>  
-		<p:panel id="diagnosis-panel" header="Diagnose #{diagnosisBean.title}" closable="true" closeSpeed="500" widgetVar="panel">  
-  			
-  			<p:ajax event="close" listener="#{diagnosisBean.deselectDiagnosis}"/>
-       		
-       		<h:outputLabel value="Wann diagnostiziert?: "/>  
-    		<p:calendar value="#{diagnosisBean.date}" pattern="dd.MM.yyyy" /> 
-       		
-       		<div style="height:20px"></div>  
-       		
-       		<h:outputLabel value="Wie lautet Diagnose?: " for="diagnosis" />  
-            <p:autoComplete id="diagnosis" value="#{diagnosisBean.diagnosisText}" completeMethod="#{diagnosisBean.complete}">
-           		<f:validateRegex pattern="[a-zA-Z öäüßÖÄÜ]+"></f:validateRegex>
-                <p:ajax update="msgDiagnosis" event="keyup" />
-            </p:autoComplete>             
-            <p:watermark for="diagnosis" value="Diagnose" />
-            <p:message id="msgDiagnosis" for="diagnosis" display="icon"/> 
-            
-            <div style="height:20px"></div>  
-            
-            <h:outputLabel value="Wie heißt der Arzt?: " for="doctor" />  
-            <p:inputText id="doctor" value="#{diagnosisBean.author}" required="true">  
-                <f:validateRegex pattern="[a-zA-Z. öäüßÖÄÜ]+"></f:validateRegex>
-                <p:ajax update="msgDoctor" event="keyup" />  
-            </p:inputText>            
-            <p:watermark for="doctor" value="Doktor" />
-            <p:message id="msgDoctor" for="doctor" display="icon"/> 
-           
-            <f:facet name="footer">  
-            	<p:commandButton id="btn" value="Speichern" update="diagnosis-panel" actionListener="#{diagnosisBean.save}"/> 
-       		</f:facet> 
-           
-   		</p:panel> 
-   	 	</h:form>
-	</div>    
+		<h:form>
+			<p:messages id="msgs" />
+			<p:panel id="diagnosis-panel"
+				header="Diagnose #{diagnosisBean.title}" closable="true"
+				closeSpeed="500" widgetVar="panel">
+				<p:ajax event="close" listener="#{diagnosisBean.deselectDiagnosis}" />
+				<h:outputLabel value="Wann diagnostiziert?: " />
+				<p:calendar value="#{diagnosisBean.date}" pattern="dd.MM.yyyy" />
+				<h:outputLabel value="Wie lautet Diagnose?: " for="diagnosis" />
+				<p:autoComplete id="diagnosis"
+					value="#{diagnosisBean.diagnosisText}"
+					completeMethod="#{diagnosisBean.complete}">
+					<f:validateRegex pattern="[a-zA-Z öäüßÖÄÜ]+"></f:validateRegex>
+					<p:ajax update="msgDiagnosis" event="keyup" />
+				</p:autoComplete>
+				<p:watermark for="diagnosis" value="Diagnose" />
+				<p:message id="msgDiagnosis" for="diagnosis" display="icon" />
+				<h:outputLabel value="Wie heißt der Arzt?: " for="doctor" />
+				<p:inputText id="doctor" value="#{diagnosisBean.author}"
+					required="true">
+					<f:validateRegex pattern="[a-zA-Z. öäüßÖÄÜ]+"></f:validateRegex>
+					<p:ajax update="msgDoctor" event="keyup" />
+				</p:inputText>
+				<p:watermark for="doctor" value="Doktor" />
+				<p:message id="msgDoctor" for="doctor" display="icon" />
+				<f:facet name="footer">
+					<p:commandButton id="btn" value="Speichern"
+						update="diagnosis-panel" actionListener="#{diagnosisBean.save}" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</div>
 </ui:composition>
-	
+
 </html>

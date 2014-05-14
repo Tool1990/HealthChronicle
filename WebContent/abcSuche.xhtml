@@ -5,65 +5,118 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" >
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/templates/template.xhtml">
-	
 	<ui:define name="content">
-	<h:outputStylesheet library="css" name="storiesList.css"  />
-	<div>
-	<p class="zentriert">Chroniken nach Krankheiten</p>
-	<br/>
-	<h:form id="buttons" class="zentriert">
-		<h:commandButton action="#{abcSucheBean.editAction}" value="A"><f:param name="action" value="A" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Ä"><f:param name="action" value="Ä" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="B"><f:param name="action" value="B" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="C"><f:param name="action" value="C" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="D"><f:param name="action" value="D" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="E"><f:param name="action" value="E" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="F"><f:param name="action" value="F" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="G"><f:param name="action" value="G" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="H"><f:param name="action" value="H" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="I"><f:param name="action" value="I" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="J"><f:param name="action" value="J" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="K"><f:param name="action" value="K" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="L"><f:param name="action" value="L" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="M"><f:param name="action" value="M" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="N"><f:param name="action" value="N" /></h:commandButton>
-		<br/>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="O"><f:param name="action" value="O" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Ö"><f:param name="action" value="Ö" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="P"><f:param name="action" value="P" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Q"><f:param name="action" value="Q" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="R"><f:param name="action" value="R" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="S"><f:param name="action" value="S" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="T"><f:param name="action" value="T" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="U"><f:param name="action" value="U" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Ü"><f:param name="action" value="Ü" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="V"><f:param name="action" value="V" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="W"><f:param name="action" value="W" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="X"><f:param name="action" value="X" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Y"><f:param name="action" value="Y" /></h:commandButton>
-		<h:commandButton action="#{abcSucheBean.editAction}" value="Z"><f:param name="action" value="Z" /></h:commandButton>
-		<br/><br/>
-
-		<p:tabView id="tabView" dynamic="true" cache="true" style="width:50%;margin: 0 auto;">  
-			<p:tab id="tba1" title="#{abcSucheBean.text}">  
-		         		<h:dataTable value="#{krankheiten.outputListe}" var="l" >
+		<h:outputStylesheet library="css" name="storiesList.css" />
+		<div>
+			<p class="zentriert">Chroniken nach Krankheiten</p>
+			<h:form id="buttons" class="zentriert">
+				<h:commandButton action="#{abcSucheBean.editAction}" value="A">
+					<f:param name="action" value="A" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Ä">
+					<f:param name="action" value="Ä" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="B">
+					<f:param name="action" value="B" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="C">
+					<f:param name="action" value="C" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="D">
+					<f:param name="action" value="D" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="E">
+					<f:param name="action" value="E" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="F">
+					<f:param name="action" value="F" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="G">
+					<f:param name="action" value="G" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="H">
+					<f:param name="action" value="H" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="I">
+					<f:param name="action" value="I" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="J">
+					<f:param name="action" value="J" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="K">
+					<f:param name="action" value="K" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="L">
+					<f:param name="action" value="L" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="M">
+					<f:param name="action" value="M" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="N">
+					<f:param name="action" value="N" />
+				</h:commandButton>
+				<br />
+				<h:commandButton action="#{abcSucheBean.editAction}" value="O">
+					<f:param name="action" value="O" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Ö">
+					<f:param name="action" value="Ö" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="P">
+					<f:param name="action" value="P" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Q">
+					<f:param name="action" value="Q" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="R">
+					<f:param name="action" value="R" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="S">
+					<f:param name="action" value="S" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="T">
+					<f:param name="action" value="T" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="U">
+					<f:param name="action" value="U" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Ü">
+					<f:param name="action" value="Ü" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="V">
+					<f:param name="action" value="V" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="W">
+					<f:param name="action" value="W" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="X">
+					<f:param name="action" value="X" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Y">
+					<f:param name="action" value="Y" />
+				</h:commandButton>
+				<h:commandButton action="#{abcSucheBean.editAction}" value="Z">
+					<f:param name="action" value="Z" />
+				</h:commandButton>
+				<p:tabView id="tabView" dynamic="true" cache="true"
+					style="width:50%;margin: 0 auto;">
+					<p:tab id="tba1" title="#{abcSucheBean.text}">
+						<h:dataTable value="#{krankheiten.outputListe}" var="l">
 							<h:column>
-		   						<!-- <h:link value="#{l}" outcome="readStories" style="color:red" /> -->
-		   			
-		   						<h:outputLink value="readStories.xhtml" style="text-decoration:none;">
-									<h:outputText style="color:black" value="#{l}" />
+								<!-- <h:link value="#{l}" outcome="readStories"/> -->
+								<h:outputLink value="readStories.xhtml">
+									<h:outputText value="#{l}" />
 									<f:param name="pAbout" value="#{l}" />
-								</h:outputLink> 
-		   		</h:column>
-		   	</h:dataTable>     
-			</p:tab> 
-		</p:tabView> 
-  
-   	</h:form>
-	</div>
+								</h:outputLink>
+							</h:column>
+						</h:dataTable>
+					</p:tab>
+				</p:tabView>
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

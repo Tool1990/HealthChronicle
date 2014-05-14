@@ -7,16 +7,27 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
-<ui:define name="content">
-		<div style="height:20px"></div>
+	<ui:define name="content">
 		<div class="chronicle">
-			 <h:panelGroup rendered = "#{chronicleBean.selectedStoryVisible}"><ui:include src="/chronicle_components/story.xhtml" /></h:panelGroup>
-  			 <h:panelGroup rendered = "#{chronicleBean.listOfStoriesVisible}"><ui:include src="/chronicle_components/stories.xhtml" /></h:panelGroup>
-   			 <h:panelGroup rendered = "#{chronicleBean.optionsVisible}"><ui:include src="/chronicle_components/options.xhtml" /></h:panelGroup>
-  			 <h:panelGroup rendered = "#{chronicleBean.diagnosisFormVisible}"><ui:include src="/chronicle_components/diagnosis.xhtml" /></h:panelGroup>
- 			 <h:panelGroup rendered = "#{chronicleBean.symptomFormVisible}"><ui:include src="/chronicle_components/symptom.xhtml" /></h:panelGroup>
-  			 <h:panelGroup rendered = "#{chronicleBean.actionFormVisible}"><ui:include src="/chronicle_components/action.xhtml" /></h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.selectedStoryVisible}">
+				<ui:include src="/chronicle_components/story.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.listOfStoriesVisible}">
+				<ui:include src="/chronicle_components/stories.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.optionsVisible}">
+				<ui:include src="/chronicle_components/options.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.diagnosisFormVisible}">
+				<ui:include src="/chronicle_components/diagnosis.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.symptomFormVisible}">
+				<ui:include src="/chronicle_components/symptom.xhtml" />
+			</h:panelGroup>
+			<h:panelGroup rendered="#{chronicleBean.actionFormVisible}">
+				<ui:include src="/chronicle_components/action.xhtml" />
+			</h:panelGroup>
 		</div>
-</ui:define>
+	</ui:define>
 </ui:composition>
 </html>

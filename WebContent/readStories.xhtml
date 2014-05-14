@@ -10,154 +10,153 @@
 	xmlns:c="http://java.sun.com/jstl/core">
 
 <ui:composition template="/templates/template.xhtml">
-	
 	<ui:define name="content">
-	<h:outputStylesheet library="css" name="storiesList.css"  />
-	<h:outputStylesheet library="css" name="buttons.css"  />
-	<h:form id="form">
-				
-		<div id="bsch" >
-			Hier können Sie diverse Einträge bzg.&nsbr; '<h:outputText value="#{readStoriesBean.about}"/>'&nsbr; lesen
-		</div>
-		<br/>
-		
-		<table class="zentriert">
-			<tr> 
-				<td>Filter nach Symptom</td>
-				<td>Filter nach Behandlung</td>
-			</tr>
-			<tr>
-				<td>
-					<h:selectManyListbox value="#{readStoriesBean.symListbox}" class="fillManyListbox" size="5">
-    					<f:selectItems value="#{readStoriesBean.selectSymptom}" var="ss"	itemLabel="#{ss.getLabel}" itemValue="#{ss.getValue}" />
-					</h:selectManyListbox>
-				</td>
-				<td>
-					<h:selectManyListbox value="#{readStoriesBean.behListbox}" class="fillManyListbox" size="5">
-    					<f:selectItems value="#{readStoriesBean.selectBehandlung}" var="sb"	itemLabel="#{sb.getLabel}" itemValue="#{sb.getValue}" />
-					</h:selectManyListbox>
-				</td>
-			</tr>
-			<tr>
-				<h:panelGrid columns="2" cellpadding="10"  class="zentriert">  
-       				<h:outputText value="Sortieren nach Datum der Diagnostizierung:" /> 
-	        		<h:selectOneRadio value="#{readStoriesBean.sort}" >
-					   <f:selectItem itemValue="DESC" itemLabel="aktuell zuerst" />
-					   <f:selectItem itemValue="ASC" itemLabel="aktuell zuletzt" />	   			
-					</h:selectOneRadio>  
-        		</h:panelGrid>
-			</tr>
-			<tr>
-				<div class="zentriert"><h:commandButton value="Übernehmen" action="#{readStoriesBean.getAllStories}" immediate="false" /></div>
-				<br/>
-			</tr>
-		</table>
-
-		<p:accordionPanel id="accordion" value="#{readStoriesBean.readStories}" var="r" dynamic="true" activeIndex="null" style="width:80%;margin: 0 auto;" >  
-			<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
-	    	<p:tab title="Chronik '#{r.title}', Status: #{r.state}, letzte Änderung #{r.t_day}.#{r.t_month}.#{r.t_year}" closable="false">  
-	            <h:dataTable value="#{readStoriesBean.user}" var="u" >
-	            	<h:column>
-	    				Details zur Person:<br/>
+		<h:outputStylesheet library="css" name="storiesList.css" />
+		<h:outputStylesheet library="css" name="buttons.css" />
+		<h:form id="form">
+			<div id="bsch">
+				Hier können Sie diverse Einträge bzg.
+				&nsbr;
+				'
+				<h:outputText value="#{readStoriesBean.about}" />
+				'
+				&nsbr;
+				lesen
+			</div>
+			<table class="zentriert">
+				<tr>
+					<td>Filter nach Symptom</td>
+					<td>Filter nach Behandlung</td>
+				</tr>
+				<tr>
+					<td><h:selectManyListbox value="#{readStoriesBean.symListbox}"
+							class="fillManyListbox" size="5">
+							<f:selectItems value="#{readStoriesBean.selectSymptom}" var="ss"
+								itemLabel="#{ss.getLabel}" itemValue="#{ss.getValue}" />
+						</h:selectManyListbox></td>
+					<td><h:selectManyListbox value="#{readStoriesBean.behListbox}"
+							class="fillManyListbox" size="5">
+							<f:selectItems value="#{readStoriesBean.selectBehandlung}"
+								var="sb" itemLabel="#{sb.getLabel}" itemValue="#{sb.getValue}" />
+						</h:selectManyListbox></td>
+				</tr>
+				<tr>
+					<h:panelGrid columns="2" cellpadding="10" class="zentriert">
+						<h:outputText value="Sortieren nach Datum der Diagnostizierung:" />
+						<h:selectOneRadio value="#{readStoriesBean.sort}">
+							<f:selectItem itemValue="DESC" itemLabel="aktuell zuerst" />
+							<f:selectItem itemValue="ASC" itemLabel="aktuell zuletzt" />
+						</h:selectOneRadio>
+					</h:panelGrid>
+				</tr>
+				<tr>
+					<div class="zentriert">
+						<h:commandButton value="Übernehmen"
+							action="#{readStoriesBean.getAllStories}" immediate="false" />
+					</div>
+				</tr>
+			</table>
+			<p:accordionPanel id="accordion"
+				value="#{readStoriesBean.readStories}" var="r" dynamic="true"
+				activeIndex="null">
+				<p:ajax event="tabChange" listener="#{readStoriesBean.onTabChange}" />
+				<p:tab
+					title="Chronik '#{r.title}', Status: #{r.state}, letzte Änderung #{r.t_day}.#{r.t_month}.#{r.t_year}"
+					closable="false">
+					<h:dataTable value="#{readStoriesBean.user}" var="u">
+						<h:column>
+	    				Details zur Person:
 	    				#{u.sex} #{readStoriesBean.userBirthday} #{u.gewicht} #{u.groesse}
     				</h:column>
-	            </h:dataTable>
-	            <br/>
+					</h:dataTable>
 	            Details zu den Diagnosen:
-	            <h:dataTable value="#{readStoriesBean.diagnosis}" var="d" class="details" style="margin: auto;">
-    				<h:column>
-	    				<f:facet name="header">Diagnose</f:facet>
+	            <h:dataTable value="#{readStoriesBean.diagnosis}" var="d"
+						class="details">
+						<h:column>
+							<f:facet name="header">Diagnose</f:facet>
 	    				#{d.diagnosis}
     				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Lokation der Krankheit</f:facet>
+						<h:column>
+							<f:facet name="header">Lokation der Krankheit</f:facet>
 	    				#{d.loc}
     				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Diagnostizierende Person</f:facet>
+						<h:column>
+							<f:facet name="header">Diagnostizierende Person</f:facet>
 	    				#{d.author}
     				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Ort der Diagnostizierung</f:facet>
+						<h:column>
+							<f:facet name="header">Ort der Diagnostizierung</f:facet>
 	    				#{d.where_was_it_done}
     				</h:column>
-    				<h:column>
-	    				<f:facet name="header">Datum</f:facet>
+						<h:column>
+							<f:facet name="header">Datum</f:facet>
 	    				#{d.day}.#{d.month}.#{d.year}
     				</h:column>
-    			</h:dataTable>
-    			<hr/>
+					</h:dataTable>
+					<hr />
     			Details zu den Symptomen:
-    			<table class="details" style="margin: auto;">
-    				<tr>
-	    				<td>
-	    					<h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
-    							<h:column>
-	    							<f:facet name="header">Symptombeschreibung</f:facet>
+    			<table class="details">
+						<tr>
+							<td><h:dataTable value="#{readStoriesBean.symptom}" var="s"
+									class="details">
+									<h:column>
+										<f:facet name="header">Symptombeschreibung</f:facet>
 	    							#{s.term}
     								</h:column>
-    						</h:dataTable>
-	    				</td>
-	    				<td>
-	    					<h:dataTable value="#{readStoriesBean.intensity}" var="i" class="details" style="margin: auto;">
-    							<h:column>
-	    							<f:facet name="header">Intensivität</f:facet>
+								</h:dataTable></td>
+							<td><h:dataTable value="#{readStoriesBean.intensity}"
+									var="i" class="details">
+									<h:column>
+										<f:facet name="header">Intensivität</f:facet>
 	    							#{i}
     							</h:column>
-    						</h:dataTable>
-	    				</td>
-						<td>
-							<h:dataTable value="#{readStoriesBean.symptom}" var="s" class="details" style="margin: auto;">
-    							<h:column>
-	    							<f:facet name="header">Datum</f:facet>
+								</h:dataTable></td>
+							<td><h:dataTable value="#{readStoriesBean.symptom}" var="s"
+									class="details">
+									<h:column>
+										<f:facet name="header">Datum</f:facet>
 	    							#{s.day}.#{s.month}.#{s.year}
     							</h:column>
-    						</h:dataTable>
-						</td>    				
-    				</tr>
-    			</table>
-    			<hr/>
+								</h:dataTable></td>
+						</tr>
+					</table>
+					<hr />
     			Details zu den Behandlungen: 
-    			<table class="details" style="margin: auto;">
-    				<tr>
-    					<td>
-    						<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
-    							<h:column>
-	    							<f:facet name="header">Behandlung</f:facet>
+    			<table class="details">
+						<tr>
+							<td><h:dataTable value="#{readStoriesBean.action}" var="a"
+									class="details">
+									<h:column>
+										<f:facet name="header">Behandlung</f:facet>
 	    							#{a.action}
     							</h:column>
-    						</h:dataTable>
-    					</td>
-    					<td>
-    						<h:dataTable value="#{readStoriesBean.periode}" var="p" class="details" style="margin: auto;">
-    							<h:column>
-	    							<f:facet name="header">Periode der Maßnahmen</f:facet>
+								</h:dataTable></td>
+							<td><h:dataTable value="#{readStoriesBean.periode}" var="p"
+									class="details">
+									<h:column>
+										<f:facet name="header">Periode der Maßnahmen</f:facet>
 	    							#{p}
     							</h:column>
-    						</h:dataTable>
-    					</td>
-    					<td>
-    						<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
-    							<h:column>
-		    						<f:facet name="header">Menge</f:facet>
+								</h:dataTable></td>
+							<td><h:dataTable value="#{readStoriesBean.action}" var="a"
+									class="details">
+									<h:column>
+										<f:facet name="header">Menge</f:facet>
 	    							#{a.amount}
     							</h:column>
-    						</h:dataTable>
-    					</td>
-						<td>
-							<h:dataTable value="#{readStoriesBean.action}" var="a" class="details" style="margin: auto;">
-	    						<h:column>
-	    							<f:facet name="header">Datum</f:facet>
+								</h:dataTable></td>
+							<td><h:dataTable value="#{readStoriesBean.action}" var="a"
+									class="details">
+									<h:column>
+										<f:facet name="header">Datum</f:facet>
 	    							#{a.day}.#{a.month}.#{a.year}
     							</h:column>
-    						</h:dataTable>
-						</td>    				
-    				</tr>
-    			</table>
-			</p:tab>
-		</p:accordionPanel> 
-	<hr style="width:75%;margin 0 auto;"/>	
-	</h:form>
+								</h:dataTable></td>
+						</tr>
+					</table>
+				</p:tab>
+			</p:accordionPanel>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
