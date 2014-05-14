@@ -4,7 +4,7 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "sessionBean")
+@ManagedBean
 @SessionScoped
 public class SessionBean
 {

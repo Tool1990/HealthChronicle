@@ -10,8 +10,8 @@
 	<h:form>
 		<ul>
 			<h:panelGroup rendered="#{sessionBean.guest}">
-				<li><h:commandButton class="login-button" value="Log-In"
-						action="login.xhtml?faces-redirect=true" title="Einlogin"></h:commandButton></li>
+				<li><h:link value="Log-In"
+						outcome="login.xhtml?faces-redirect=true" title="Login"></h:link></li>
 				<li><h:link value="Registrieren" outcome="registration.xhtml"
 						title="Hier kommen Sie zur Registrierung"></h:link></li>
 			</h:panelGroup>
@@ -31,7 +31,7 @@
 			</h:panelGroup>
 			<h:panelGroup rendered="#{sessionBean.loggedIn}">
 				<li><h:commandLink value="Log-out"
-						action="#{loginBean.logout()}" title="Auslogin"></h:commandLink></li>
+						action="#{loginBean.logout()}" title="Abmelden"></h:commandLink></li>
 			</h:panelGroup>
 		</ul>
 	</h:form>
