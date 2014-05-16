@@ -9,29 +9,20 @@
 <h:body>
 	<h:form>
 		<ul>
-			<h:panelGroup rendered="#{sessionBean.guest}">
-				<li><h:link value="Log-In"
-						outcome="login.xhtml?faces-redirect=true" title="Login"></h:link></li>
-				<li><h:link value="Registrieren" outcome="registration.xhtml"
-						title="Hier kommen Sie zur Registrierung"></h:link></li>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{sessionBean.user}">
-				<li><h:commandButton class="MainMenu-button" value="Hauptmenü"
-						action="MainMenu.xhtml?faces-redirect=true"
-						title="Hier kommen Sie zum Hauptmenü"></h:commandButton></li>
-				<li><h:commandButton class="chronicle-button" value="Suche"
-						action="abcSuche.xhtml?faces-redirect=true"
-						title="Hier können Sie nach Krankheiten suchen"></h:commandButton></li>
-				<li><h:commandButton class="chronicle-button" value="Chronik"
-						action="chronicle.xhtml?faces-redirect=true"
-						title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten"></h:commandButton></li>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{sessionBean.admin}">
-				<li><h:link value="Manage Users" outcome="admin.xhtml"></h:link></li>
+			<h:panelGroup rendered="#{sessionBean.loggedIn}">
+				<li><h:outputLink value="login.jsf" title="Login">Log-In</h:outputLink></li>
+				<li><h:outputLink value="registration.jsf"
+						title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{sessionBean.loggedIn}">
-				<li><h:commandLink value="Log-out"
-						action="#{loginBean.logout()}" title="Abmelden"></h:commandLink></li>
+				<li><h:outputLink value="MainMenu.xhtml"
+						title="Hier kommen Sie zum Hauptmenü">Hauptmenü</h:outputLink></li>
+				<li><h:outputLink value="chronicle.xhtml"
+						title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten">Chronik</h:outputLink></li>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{sessionBean.loggedIn}">
+				<li><h:commandLink value="Abmelden"
+						action="#{loginBean.logout}" title="Abmelden"></h:commandLink></li>
 			</h:panelGroup>
 		</ul>
 	</h:form>

@@ -21,43 +21,46 @@
 					<p:messages id="msgs" />
 					<h:panelGrid columns="3">
 						<h:outputLabel for="email" value="E-mail: *" />
-						<p:inputText id="email" value="#{registerBean.name}" tabindex="1"
-							required="true" label="E-mail" placeholder="MaxMuster@gmail.com"
+						<p:inputText id="email" value="#{loginBean.user.email}"
+							tabindex="1" required="true" label="E-mail"
+							placeholder="MaxMuster@gmail.com"
 							validatorMessage="Ungültige E-Mail-Adresse, bitte versuchen Sie es erneut">
-							<f:validateLength minimum="3" />
+							<f:validateLength minimum="5" />
 							<f:validateRegex
 								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							<f:validateRequired />
 						</p:inputText>
 						<p:message for="email" display="icon" />
 						<h:outputLabel for="password" value="Passwort: *" />
-						<p:password id="password" value="#{registerBean.password}"
+						<p:password id="password" value="#{loginBean.user.password}"
 							tabindex="2" label="Password" required="true"
-							placeholder="min. 6 Zeichen a-z,0-9">
-							<f:validateLength minimum="6" />
+							placeholder="min. 3 Zeichen">
+							<f:validateLength minimum="3" />
 							<f:validateRequired />
 							<p:ajax update="msgPassword" event="keyup" />
 						</p:password>
 						<p:message for="password" id="msgPassword" display="icon" />
 					</h:panelGrid>
 					<fieldset>
-						<legend>Freiwillige Daten zu ihrer Person</legend>
-
-						<h:selectOneRadio value="#{registerBean.sex}">
-							<f:selectItem itemLabel="Männlich" itemValue="männlich" />
-							<f:selectItem itemLabel="Weiblich" itemValue="weiblich" />
+						<legend>Freiwillige Daten zu Ihrer Person</legend>
+						<h:selectOneRadio value="#{loginBean.user.gender}">
+							<f:selectItem itemLabel="Männlich" itemValue="m" />
+							<f:selectItem itemLabel="Weiblich" itemValue="f" />
 						</h:selectOneRadio>
-						<label>Geburtstag:</label>
-						<p:calendar value="#{registerBean.date}" pattern="dd.MM.yyyy" />
+						<label>Geburtsjahr:</label>
+						<p:inputText value="#{loginBean.user.birthyear}"
+							pattern="^[0-9]{4}$" label="Geburtsjahr">
+							<f:validateLength minimum="4" maximum="4" />
+						</p:inputText>
 						<label>Gewicht:</label>
-						<p:inputText value="#{registerBean.gewicht}" required="false"
+						<p:inputText value="#{loginBean.user.weight}" required="false"
 							placeholder="in Kilogramm"></p:inputText>
 						<label>Größe:</label>
-						<p:inputText value="#{registerBean.groesse}" required="false"
+						<p:inputText value="#{loginBean.user.height}" required="false"
 							placeholder="in Zentimeter"></p:inputText>
 					</fieldset>
 					<p:commandButton id="btn" value="Registrieren" update="panel"
-						action="#{registerBean.registerUser()}" />
+						action="#{loginBean.register}" />
 				</p:panel>
 			</h:form>
 		</div>
