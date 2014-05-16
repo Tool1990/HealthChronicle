@@ -9,18 +9,14 @@
 <h:body>
 	<h:form>
 		<ul>
-			<h:panelGroup rendered="#{sessionBean.loggedIn}">
+			<h:panelGroup rendered="#{!sessionBean.loggedIn}">
 				<li><h:outputLink value="login.jsf" title="Login">Log-In</h:outputLink></li>
 				<li><h:outputLink value="registration.jsf"
 						title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{sessionBean.loggedIn}">
-				<li><h:outputLink value="MainMenu.xhtml"
-						title="Hier kommen Sie zum Hauptmenü">Hauptmenü</h:outputLink></li>
 				<li><h:outputLink value="chronicle.xhtml"
 						title="Hier können Sie ihre persönliche Krankheits-Chronik einsehen und bearbeiten">Chronik</h:outputLink></li>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{sessionBean.loggedIn}">
 				<li><h:commandLink value="Abmelden"
 						action="#{loginBean.logout}" title="Abmelden"></h:commandLink></li>
 			</h:panelGroup>
