@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/templates/template.xhtml">
+	<ui:define name="title">Neuen Benutzer anlegen</ui:define>
 	<ui:define name="content">
 		<div class="common-content" id="login">
 			<div id="registration">
@@ -21,7 +22,7 @@
 					<p:messages id="msgs" />
 					<h:panelGrid columns="3">
 						<h:outputLabel for="email" value="E-mail: *" />
-						<p:inputText id="email" value="#{loginBean.user.email}"
+						<p:inputText id="email" value="#{sessionBean.platformUser.email}"
 							tabindex="1" required="true" label="E-mail"
 							placeholder="MaxMuster@gmail.com"
 							validatorMessage="Ungültige E-Mail-Adresse, bitte versuchen Sie es erneut">
@@ -32,7 +33,7 @@
 						</p:inputText>
 						<p:message for="email" display="icon" />
 						<h:outputLabel for="password" value="Passwort: *" />
-						<p:password id="password" value="#{loginBean.user.password}"
+						<p:password id="password" value="#{sessionBean.platformUser.password}"
 							tabindex="2" label="Password" required="true"
 							placeholder="min. 3 Zeichen">
 							<f:validateLength minimum="3" />
@@ -43,20 +44,20 @@
 					</h:panelGrid>
 					<fieldset>
 						<legend>Freiwillige Daten zu Ihrer Person</legend>
-						<h:selectOneRadio value="#{loginBean.user.gender}">
+						<h:selectOneRadio value="#{sessionBean.platformUser.gender}">
 							<f:selectItem itemLabel="Männlich" itemValue="m" />
 							<f:selectItem itemLabel="Weiblich" itemValue="f" />
 						</h:selectOneRadio>
 						<label>Geburtsjahr:</label>
-						<p:inputText value="#{loginBean.user.birthyear}"
+						<p:inputText value="#{sessionBean.platformUser.birthyear}"
 							pattern="^[0-9]{4}$" label="Geburtsjahr">
 							<f:validateLength minimum="4" maximum="4" />
 						</p:inputText>
 						<label>Gewicht:</label>
-						<p:inputText value="#{loginBean.user.weight}" required="false"
+						<p:inputText value="#{sessionBean.platformUser.weight}" required="false"
 							placeholder="in Kilogramm"></p:inputText>
 						<label>Größe:</label>
-						<p:inputText value="#{loginBean.user.height}" required="false"
+						<p:inputText value="#{sessionBean.platformUser.height}" required="false"
 							placeholder="in Zentimeter"></p:inputText>
 					</fieldset>
 					<p:commandButton id="btn" value="Registrieren" update="panel"

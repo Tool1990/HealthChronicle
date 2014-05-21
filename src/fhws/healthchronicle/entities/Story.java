@@ -1,7 +1,7 @@
 package fhws.healthchronicle.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,11 +12,12 @@ public class Story
 {
 	@Id
 	@GeneratedValue
-	private long			id;
-	private String			title;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stories")
-	private PlatformUser	user;
+	private long id;
+	@Column(nullable = false)
+	private String title;
+	@ManyToOne
+	@JoinColumn(name="platformUser", nullable=false)
+	private PlatformUser platformUser;
 
 	public long getId()
 	{
@@ -40,11 +41,11 @@ public class Story
 
 	public PlatformUser getPlatformUser()
 	{
-		return user;
+		return platformUser;
 	}
 
-	public void setPlatformUser(PlatformUser user)
+	public void setPlatformUser(PlatformUser platformUser)
 	{
-		this.user = user;
+		this.platformUser = platformUser;
 	}
 }

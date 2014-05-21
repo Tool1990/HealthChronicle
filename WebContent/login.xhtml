@@ -14,14 +14,14 @@
 				<p:panel id="panel" header="Login">
 					<p:messages id="msgs" />
 					<h:panelGrid columns="3">
-						<h:outputLabel for="email" value="E-mail: *" />
-						<p:inputText id="email" value="#{loginBean.user.email}"
+						<h:outputLabel for="email" value="E-mail:" />
+						<p:inputText id="email" value="#{sessionBean.platformUser.email}"
 							tabindex="1" required="true" label="E-mail"
 							placeholder="testmail@gmail.com">
 						</p:inputText>
 						<p:message for="email" display="icon" />
-						<h:outputLabel for="password" value="Passwort: *" />
-						<p:password id="password" value="#{loginBean.user.password}"
+						<h:outputLabel for="password" value="Passwort:" />
+						<p:password id="password" value="#{sessionBean.platformUser.password}"
 							tabindex="2" label="Password" required="true"
 							placeholder="Mindestens 3 Zeichen">
 							<f:validateLength minimum="3" />

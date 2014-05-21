@@ -5,7 +5,6 @@ import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -17,16 +16,16 @@ public class PlatformUser
 {
 	@Id
 	@GeneratedValue
-	private Long		id;
+	private Long id;
 	@Column(nullable = false)
-	private String		email;
-	private String		password;
-	private char		gender		= 'm';
-	private double		weight;
-	private double		height;
-	private int			birthyear	= 1990;
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "user")
-	private List<Story>	stories		= new ArrayList<Story>();
+	private String email;
+	private String password;
+	private char gender = 'm';
+	private double weight;
+	private double height;
+	private int birthyear = 1990;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
+	private List<Story> stories = new ArrayList<Story>();
 
 	public Long getId()
 	{
