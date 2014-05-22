@@ -14,11 +14,10 @@ import fhws.healthchronicle.entities.PlatformUser;
 @ManagedBean
 public class SessionBean implements Serializable
 {
-	private static final long serialVersionUID = -5907159821411980871L;
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 	
-	@PersistenceContext
+	//@PersistenceContext
 	private EntityManager em;
 
 	public EntityManager getEm()

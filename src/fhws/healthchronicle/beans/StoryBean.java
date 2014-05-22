@@ -32,13 +32,15 @@ public class StoryBean implements Serializable
 			System.out.println("Not logged in");
 			return "index";
 		}
+		
+//		story.setPlatformUser(session.getPlatformUser());
+//		session.getEm().getTransaction().begin();
+//		session.getEm().persist(story);
+//		session.getEm().getTransaction().commit();
 
 		List<Story> stories = session.getPlatformUser().getStories();
 		stories.add(story);
 		session.getPlatformUser().setStories(stories);
-		
-		// story.setPlatformUser(session.getUser());
-		
 		session.getEm().getTransaction().begin();
 		session.getEm().persist(session.getPlatformUser());
 		session.getEm().getTransaction().commit();

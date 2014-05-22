@@ -32,6 +32,9 @@ public class LoginBean implements Serializable
 		query.setParameter("email", session.getPlatformUser().getEmail());
 		List<PlatformUser> resultList = query.getResultList();
 
+		System.out.println(session.getPlatformUser().getPassword());
+		System.out.println(resultList.get(0).getPassword());
+		
 		if (resultList != null && resultList.size() == 1 && resultList.get(0).getPassword().equals(session.getPlatformUser().getPassword()))
 		{
 			session.setLoggedIn(true);
@@ -57,7 +60,10 @@ public class LoginBean implements Serializable
 		List<PlatformUser> resultList = query.getResultList();
 
 		if (resultList.size() != 0)
-			return "Email ist bereits registriert";
+		{
+			System.out.println("registration failed");
+			return "";
+		}
 
 		session.getEm().getTransaction().begin();
 		session.getEm().persist(session.getPlatformUser());

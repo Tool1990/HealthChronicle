@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Story
@@ -13,10 +14,9 @@ public class Story
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(nullable = false)
 	private String title;
-	@ManyToOne
-	@JoinColumn(name="platformUser", nullable=false)
+	@OneToOne
+	//@JoinColumn(name="platformUser", nullable=false)
 	private PlatformUser platformUser;
 
 	public long getId()

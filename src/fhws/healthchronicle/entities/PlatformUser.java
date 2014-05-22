@@ -17,14 +17,15 @@ public class PlatformUser
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String email;
 	private String password;
 	private char gender = 'm';
 	private double weight;
 	private double height;
 	private int birthyear = 1990;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
+	@OneToMany(targetEntity=Story.class, cascade=CascadeType.ALL)
 	private List<Story> stories = new ArrayList<Story>();
 
 	public Long getId()
