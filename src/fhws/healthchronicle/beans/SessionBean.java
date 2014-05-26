@@ -3,6 +3,7 @@ package fhws.healthchronicle.beans;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,18 +17,19 @@ public class SessionBean implements Serializable
 {
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
-	
-	//@PersistenceContext
+
+	@ManagedProperty(value = "#{entityManagerFactoryBean}")
+	private EntityManagerFactoryBean emfBean;
 	private EntityManager em;
 
 	public EntityManager getEm()
 	{
 		if (em == null)
 		{
-			em = new EntityManagerFactoryBean().getEntityManager();
+			em = emfBean.getEntityManager();
 			System.out.println("new entity manager");
 		}
-		
+
 		return em;
 	}
 
@@ -64,5 +66,15 @@ public class SessionBean implements Serializable
 	public void setLoggedIn(boolean loggedIn)
 	{
 		this.loggedIn = loggedIn;
+	}
+
+	public EntityManagerFactoryBean getEmfBean()
+	{
+		return emfBean;
+	}
+
+	public void setEmfBean(EntityManagerFactoryBean emfBean)
+	{
+		this.emfBean = emfBean;
 	}
 }
