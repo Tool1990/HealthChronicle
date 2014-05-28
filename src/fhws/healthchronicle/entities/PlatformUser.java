@@ -1,5 +1,6 @@
 package fhws.healthchronicle.entities;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "getPlatformUser", query = "SELECT u FROM PlatformUser u WHERE email = :email")
-public class PlatformUser
+public class PlatformUser implements Serializable
 {
 	@Id
 	@GeneratedValue
@@ -25,7 +26,8 @@ public class PlatformUser
 	private double height;
 	private int birthyear = 1990;
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
-	@OneToMany(targetEntity=Story.class, cascade=CascadeType.ALL)
+//	@OneToMany(targetEntity=Story.class, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="platformUser")
 	private List<Story> stories = new ArrayList<Story>();
 
 	public Long getId()

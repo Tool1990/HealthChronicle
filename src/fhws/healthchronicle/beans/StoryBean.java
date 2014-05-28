@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import fhws.healthchronicle.entities.Story;
 
@@ -18,6 +20,7 @@ public class StoryBean implements Serializable
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
 	private Story story;
+	private List<Story> stories;
 
 	public StoryBean()
 	{
@@ -39,14 +42,25 @@ public class StoryBean implements Serializable
 //		session.getEm().getTransaction().commit();
 
 		List<Story> stories = session.getPlatformUser().getStories();
+		
+		story.setPlatformUser(session.getPlatformUser());
 		stories.add(story);
+		
+		System.out.println(story.getPlatformUser().getEmail());
+		
 		session.getPlatformUser().setStories(stories);
 		session.getEm().getTransaction().begin();
-		session.getEm().persist(session.getPlatformUser());
+		session.getEm().persist(story);
 		session.getEm().getTransaction().commit();
 
 		System.out.println("New story ok");
 		return "index";
+	}
+	
+	public List<Story> gs()
+	{
+		Query q = session.getEm().createQuery("SELECT s FROM Story s");
+		return q.getResultList();
 	}
 
 	public SessionBean getSession()
@@ -67,5 +81,19 @@ public class StoryBean implements Serializable
 	public void setStory(Story story)
 	{
 		this.story = story;
+	}
+
+	public List<Story> getStories()
+	{
+//		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
+//		return query.getResultList();
+		
+		Query q = session.getEm().createQuery("SELECT s FROM Story s");
+		return q.getResultList();
+	}
+
+	public void setStories(List<Story> stories)
+	{
+		this.stories = stories;
 	}
 }

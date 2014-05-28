@@ -1,30 +1,36 @@
 package fhws.healthchronicle.entities;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Story
+@NamedQuery(name="getStories", query="SELECT s FROM Story s")
+public class Story implements Serializable
 {
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	private String title;
-	@OneToOne
+	
 	//@JoinColumn(name="platformUser", nullable=false)
+	@ManyToOne
 	private PlatformUser platformUser;
 
-	public long getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(long id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

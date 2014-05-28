@@ -31,9 +31,6 @@ public class LoginBean implements Serializable
 		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
 		query.setParameter("email", session.getPlatformUser().getEmail());
 		List<PlatformUser> resultList = query.getResultList();
-
-		System.out.println(session.getPlatformUser().getPassword());
-		System.out.println(resultList.get(0).getPassword());
 		
 		if (resultList != null && resultList.size() == 1 && resultList.get(0).getPassword().equals(session.getPlatformUser().getPassword()))
 		{

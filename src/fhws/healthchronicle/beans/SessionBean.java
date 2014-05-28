@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import fhws.healthchronicle.dao.EntityManagerFactoryBean;
 import fhws.healthchronicle.entities.PlatformUser;
@@ -15,6 +14,7 @@ import fhws.healthchronicle.entities.PlatformUser;
 @ManagedBean
 public class SessionBean implements Serializable
 {
+	private static final long serialVersionUID = 6777774608213533082L;
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 
