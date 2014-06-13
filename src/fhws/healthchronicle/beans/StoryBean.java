@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import fhws.healthchronicle.entities.PlatformUser;
 import fhws.healthchronicle.entities.Story;
 
 @RequestScoped
@@ -85,11 +86,13 @@ public class StoryBean implements Serializable
 
 	public List<Story> getStories()
 	{
-//		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
-//		return query.getResultList();
+		System.out.println("getStories");
+		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
+		List<Story> result = query.getResultList();
+		return result;
 		
-		Query q = session.getEm().createQuery("SELECT s FROM Story s");
-		return q.getResultList();
+//		Query q = session.getEm().createQuery("SELECT s FROM Story s");
+//		return q.getResultList();
 	}
 
 	public void setStories(List<Story> stories)
