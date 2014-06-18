@@ -54,7 +54,7 @@ public class LoginBean implements Serializable
 
 	public String logout()
 	{
-		session.setLoggedIn(false);
+		session.destroy();
 		System.out.println("logout ok");
 		return "index";
 	}

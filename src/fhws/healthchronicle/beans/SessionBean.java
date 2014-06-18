@@ -5,7 +5,10 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+
+import org.apache.catalina.Session;
 
 import fhws.healthchronicle.dao.EntityManagerFactoryBean;
 import fhws.healthchronicle.entities.PlatformUser;
@@ -41,6 +44,12 @@ public class SessionBean implements Serializable
 
 	public SessionBean()
 	{
+	}
+	
+	public void destroy()
+	{
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		System.out.println("session destroyed");
 	}
 
 	public PlatformUser getPlatformUser()
