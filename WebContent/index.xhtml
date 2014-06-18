@@ -7,9 +7,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/templates/template.xhtml">
-	<ui:define name="content">
-		<div id="template">Willkommen bei Health Chronicle</div>
-	</ui:define>
-</ui:composition>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<div id="template"><h:outputText value="#{sessionBean.platformUser.email}"/>Willkommen bei Health Chronicle</div>
+		</ui:define>
+	</ui:composition>
 </html>

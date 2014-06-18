@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
-@NamedQuery(name="getStories", query="SELECT s FROM Story s")
+@NamedQuery(name="getStories", query="SELECT s FROM Story s WHERE s.platformUser.id = :userId")
 public class Story implements Serializable
 {
 	@Id

@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.persistence.TypedQuery;
 
 import fhws.healthchronicle.entities.PlatformUser;
+import fhws.healthchronicle.entities.Story;
 
 @RequestScoped
 @ManagedBean
@@ -34,7 +35,15 @@ public class LoginBean implements Serializable
 		
 		if (resultList != null && resultList.size() == 1 && resultList.get(0).getPassword().equals(session.getPlatformUser().getPassword()))
 		{
+			session.setPlatformUser(resultList.get(0));
+			
+			TypedQuery<Story> queryStory = session.getEm().createNamedQuery("getStories", Story.class);
+			queryStory.setParameter("userId", resultList.get(0).getId());
+			List<Story> result = queryStory.getResultList();
+			session.getPlatformUser().setStories(result);
+			
 			session.setLoggedIn(true);
+			
 			System.out.println("login ok");
 			return "index";
 		}
@@ -52,6 +61,7 @@ public class LoginBean implements Serializable
 
 	public String register()
 	{
+//		session.getPlatformUser().setId(null);
 		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
 		query.setParameter("email", session.getPlatformUser().getEmail());
 		List<PlatformUser> resultList = query.getResultList();

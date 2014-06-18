@@ -21,10 +21,10 @@ public class PlatformUser implements Serializable
 	//@Column(nullable = false)
 	private String email;
 	private String password;
-	private char gender = 'm';
-	private double weight;
-	private double height;
-	private int birthyear = 1990;
+	private Character gender = 'm';
+	private Long weight;
+	private Long height;
+	private Integer birthyear = 1990;
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
 //	@OneToMany(targetEntity=Story.class, cascade=CascadeType.ALL)
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="platformUser")
@@ -60,53 +60,59 @@ public class PlatformUser implements Serializable
 		this.password = password;
 	}
 
-	public char getGender()
+	public Character getGender()
 	{
 		return gender;
 	}
 
-	public void setGender(char gender)
+	public void setGender(Character gender)
 	{
 		this.gender = gender;
 	}
 
-	public double getWeight()
+	public Long getWeight()
 	{
 		return weight;
 	}
 
-	public void setWeight(double weight)
+	public void setWeight(Long weight)
 	{
 		this.weight = weight;
 	}
 
-	public double getHeight()
+	public Long getHeight()
 	{
 		return height;
 	}
 
-	public void setHeight(double height)
+	public void setHeight(Long height)
 	{
 		this.height = height;
 	}
 
-	public int getBirthyear()
+	public Integer getBirthyear()
 	{
 		return birthyear;
 	}
 
-	public void setBirthyear(int birthyear)
+	public void setBirthyear(Integer birthyear)
 	{
 		this.birthyear = birthyear;
 	}
 
 	public List<Story> getStories()
 	{
+		System.out.println("getStories()");
 		return stories;
 	}
 
 	public void setStories(List<Story> stories)
 	{
 		this.stories = stories;
+	}
+	
+	public void addStory(Story story)
+	{
+		stories.add(story);
 	}
 }

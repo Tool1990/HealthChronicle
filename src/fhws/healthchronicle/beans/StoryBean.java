@@ -20,8 +20,10 @@ public class StoryBean implements Serializable
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
+	
+//	private List<Story> stories;
+	
 	private Story story;
-	private List<Story> stories;
 
 	public StoryBean()
 	{
@@ -41,28 +43,24 @@ public class StoryBean implements Serializable
 //		session.getEm().getTransaction().begin();
 //		session.getEm().persist(story);
 //		session.getEm().getTransaction().commit();
-
-		List<Story> stories = session.getPlatformUser().getStories();
 		
 		story.setPlatformUser(session.getPlatformUser());
-		stories.add(story);
 		
-		System.out.println(story.getPlatformUser().getEmail());
-		
-		session.getPlatformUser().setStories(stories);
 		session.getEm().getTransaction().begin();
 		session.getEm().persist(story);
 		session.getEm().getTransaction().commit();
+		
+		session.getPlatformUser().addStory(story);
 
 		System.out.println("New story ok");
 		return "index";
 	}
 	
-	public List<Story> gs()
-	{
-		Query q = session.getEm().createQuery("SELECT s FROM Story s");
-		return q.getResultList();
-	}
+//	public List<Story> gs()
+//	{
+//		Query q = session.getEm().createQuery("SELECT s FROM Story s");
+//		return q.getResultList();
+//	}
 
 	public SessionBean getSession()
 	{
@@ -84,19 +82,20 @@ public class StoryBean implements Serializable
 		this.story = story;
 	}
 
-	public List<Story> getStories()
-	{
-		System.out.println("getStories");
-		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
-		List<Story> result = query.getResultList();
-		return result;
-		
-//		Query q = session.getEm().createQuery("SELECT s FROM Story s");
-//		return q.getResultList();
-	}
+//	public List<Story> getStories()
+//	{
+//		System.out.println("getStories");
+//		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
+//		query.setParameter("userId", session.getPlatformUser().getId());
+//		List<Story> result = query.getResultList();
+//		return result;
+//		
+////		Query q = session.getEm().createQuery("SELECT s FROM Story s");
+////		return q.getResultList();
+//	}
 
-	public void setStories(List<Story> stories)
-	{
-		this.stories = stories;
-	}
+//	public void setStories(List<Story> stories)
+//	{
+//		this.stories = stories;
+//	}
 }

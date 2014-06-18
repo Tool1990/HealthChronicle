@@ -18,7 +18,7 @@
 					<p:column>Inhalt</p:column>
 				</p:row>
 			</f:facet>
-			<c:forEach var="s" items="#{storyBean.stories}">
+			<c:forEach var="s" items="#{sessionBean.platformUser.stories}">
 				<p:row>
 					<p:column>#{s.id}</p:column>
 					<p:column>#{s.title}</p:column>

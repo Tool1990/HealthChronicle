@@ -15,6 +15,7 @@ import fhws.healthchronicle.entities.PlatformUser;
 public class SessionBean implements Serializable
 {
 	private static final long serialVersionUID = 6777774608213533082L;
+	
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 
@@ -49,7 +50,8 @@ public class SessionBean implements Serializable
 			System.out.println("new PlatformUser");
 			platformUser = new PlatformUser();
 		}
-
+		
+		System.out.println("getPlatformUser()");
 		return platformUser;
 	}
 
