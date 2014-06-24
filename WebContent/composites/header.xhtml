@@ -1,28 +1,22 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<h:form xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:body>
-	<h:form>
-		<ul>
-			<h:panelGroup rendered="#{!sessionBean.loggedIn}">
-				<li><h:outputLink value="login.jsf" title="Login">Log-In</h:outputLink></li>
-				<li><h:outputLink value="registration.jsf"
-						title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{sessionBean.loggedIn}">
-				<li><h:outputLink value="new-story.jsf"
-						title="Neuen Krankheitsverlauf anlegen">Neue Story anlegen</h:outputLink></li>
-				<li><h:outputLink value="show-stories.jsf"
-						title="Krankheitsverlauf anzeigen">Alle Stories anzeigen</h:outputLink></li>
-				<li><h:commandLink value="Abmelden"
-						action="#{loginBean.logout}" title="Abmelden"></h:commandLink></li>
-			</h:panelGroup>
-		</ul>
-	</h:form>
-</h:body>
-</html>
+	<ul>
+		<h:panelGroup rendered="#{!sessionBean.loggedIn}">
+			<li><h:outputLink value="login.jsf" title="Login">Log-In</h:outputLink></li>
+			<li><h:outputLink value="registration.jsf"
+					title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{sessionBean.loggedIn}">
+			<li><h:outputLink value="new-story.jsf"
+					title="Neuen Krankheitsverlauf anlegen">Neue Story anlegen</h:outputLink></li>
+			<li><h:outputLink value="show-stories.jsf"
+					title="Krankheitsverlauf anzeigen">Alle Stories anzeigen</h:outputLink></li>
+			<li><h:commandLink value="Abmelden" action="#{loginBean.logout}"
+					title="Abmelden"></h:commandLink></li>
+		</h:panelGroup>
+	</ul>
+</h:form>
