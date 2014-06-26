@@ -62,6 +62,9 @@ body {
 	margin-top: 100px;
 	text-align: center;
 	font-size: 25px;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .ui-panel-titlebar {
@@ -154,5 +157,6 @@ body {
 .ui-panel{
 	background: whitesmoke;
 }
+
 }
 }
