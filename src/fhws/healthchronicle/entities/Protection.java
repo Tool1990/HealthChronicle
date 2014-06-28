@@ -9,7 +9,6 @@ public class Protection extends Event
 
 	private Float quantity;
 	private String quantityUnit;
-	private Integer interval;
 	private String intervalUnit;
 	private Integer period;
 	private String periodUnit;
@@ -32,16 +31,6 @@ public class Protection extends Event
 	public void setQuantityUnit(String quantityUnit)
 	{
 		this.quantityUnit = quantityUnit;
-	}
-
-	public Integer getInterval()
-	{
-		return interval;
-	}
-
-	public void setInterval(Integer interval)
-	{
-		this.interval = interval;
 	}
 
 	public String getIntervalUnit()

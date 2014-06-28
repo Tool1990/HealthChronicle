@@ -25,7 +25,7 @@ public class Event implements Serializable
 	
 	private String type = "symptom";
 	private String description;
-	private Date date;
+	private Date date = new Date();
 
 	@ManyToOne
 	private Story story;

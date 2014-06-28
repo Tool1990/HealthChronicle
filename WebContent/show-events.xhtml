@@ -16,12 +16,22 @@
 			var="e">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-				#{e.id}
-				</h:column>
+				<h:outputText value="#{e.id}" />
+			</h:column>
 			<h:column>
-				<f:facet name="header">type</f:facet>
-				#{e.type}
-				</h:column>
+				<f:facet name="header">Typ</f:facet>
+				<h:outputText value="#{e.type}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Beschreibung</f:facet>
+				<h:outputText value="#{e.description}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Datum</f:facet>
+				<h:outputText value="#{e.date}">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+				</h:outputText>
+			</h:column>
 		</h:dataTable>
 		<h:button
 			value="Neues Ereignis"

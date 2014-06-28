@@ -76,7 +76,7 @@
 				id="protection"
 				columns="3">
 				<h:outputLabel
-					value="Anzahl pro Einheit"
+					value="Wieviel"
 					for="quantity" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.quantity}"
@@ -92,39 +92,38 @@
 						itemValue="pieces"
 						itemLabel="Stück" />
 				</h:selectOneMenu>
-				<h:outputLabel
-					value="Abstand pro Einheit"
-					for="interval" />
-				<h:inputText
-					value="#{eventBean.protectionEvent.interval}"
-					id="interval" />
+				<h:outputLabel value="Pro" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.intervalUnit}">
 					<f:selectItem
 						itemValue="hours"
-						itemLabel="Stunden" />
+						itemLabel="Stunde" />
 					<f:selectItem
 						itemValue="days"
-						itemLabel="Tage" />
+						itemLabel="Tag" />
 					<f:selectItem
 						itemValue="weeks"
-						itemLabel="Wochen" />
+						itemLabel="Woche" />
 				</h:selectOneMenu>
+				<!-- placeholder -->
 				<h:outputLabel
-					value="Zeitraum"
+					value="Wielange"
 					for="period" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.period}"
 					id="period" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.periodUnit}">
 					<f:selectItem
-						itemValue="hours"
-						itemLabel="Stunden" />
-					<f:selectItem
 						itemValue="days"
 						itemLabel="Tage" />
 					<f:selectItem
 						itemValue="weeks"
 						itemLabel="Wochen" />
+					<f:selectItem
+						itemValue="weeks"
+						itemLabel="Monate" />
+					<f:selectItem
+						itemValue="weeks"
+						itemLabel="Jahre" />
 				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:commandButton

@@ -16,8 +16,8 @@ import fhws.healthchronicle.entities.Story;
 @ManagedBean
 public class SessionBean implements Serializable
 {
-	private static final long serialVersionUID = 6777774608213533082L;
-
+	private static final long serialVersionUID = 1L;
+	
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 	private Story activeStory;

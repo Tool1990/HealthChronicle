@@ -13,7 +13,7 @@ import fhws.healthchronicle.entities.Story;
 @ManagedBean
 public class StoryBean implements Serializable
 {
-	private static final long serialVersionUID = 1261120717489692759L;
+	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;

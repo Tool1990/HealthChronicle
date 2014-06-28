@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	font-size: 13px;
 	background: whitesmoke;
+	font-family: Tahoma;
 }
 
 #header {
@@ -59,12 +60,8 @@ body {
 }
 
 #content {
-	margin-top: 100px;
-	text-align: center;
-	font-size: 25px;
-	width: 70%;
-	margin-left: auto;
-	margin-right: auto;
+	margin-top: 50px;
+	margin-left: 30px;
 }
 
 .ui-panel-titlebar {
