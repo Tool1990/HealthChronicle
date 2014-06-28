@@ -14,7 +14,7 @@
 			<h:panelGrid columns="2">
 				<h:outputLabel
 					for="type"
-					value="Art"></h:outputLabel>
+					value="Art:"></h:outputLabel>
 				<h:selectOneMenu
 					value="#{eventBean.event.type}"
 					id="type">
@@ -32,14 +32,14 @@
 						render="@all" />
 				</h:selectOneMenu>
 				<h:outputLabel
-					value="Beschreibung"
+					value="Beschreibung:"
 					for="description" />
 				<h:inputText
 					value="#{eventBean.event.description}"
 					id="description" />
 				<h:outputLabel
 					for="date"
-					value="Datum"></h:outputLabel>
+					value="Datum:"></h:outputLabel>
 				<h:inputText
 					value="#{eventBean.event.date}"
 					id="date">
@@ -50,13 +50,13 @@
 				id="symptom"
 				columns="2">
 				<h:outputLabel
-					value="Körperstelle"
+					value="Körperstelle:"
 					for="location" />
 				<h:inputText
 					value="#{eventBean.symptomEvent.location}"
 					id="location" />
 				<h:outputLabel
-					value="Schmerzgrad"
+					value="Schmerzgrad:"
 					for="intensity" />
 				<h:inputText
 					value="#{eventBean.symptomEvent.intensity}"
@@ -66,7 +66,7 @@
 				id="diagnosis"
 				columns="2">
 				<h:outputLabel
-					value="Arzt"
+					value="Arzt:"
 					for="doctor" />
 				<h:inputText
 					value="#{eventBean.diagnosisEvent.doctor}"
@@ -76,7 +76,7 @@
 				id="protection"
 				columns="3">
 				<h:outputLabel
-					value="Wieviel"
+					value="Wieviel:"
 					for="quantity" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.quantity}"
@@ -92,7 +92,7 @@
 						itemValue="pieces"
 						itemLabel="Stück" />
 				</h:selectOneMenu>
-				<h:outputLabel value="Pro" />
+				<h:outputLabel value="Pro:" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.intervalUnit}">
 					<f:selectItem
 						itemValue="hours"
@@ -106,7 +106,7 @@
 				</h:selectOneMenu>
 				<!-- placeholder -->
 				<h:outputLabel
-					value="Wielange"
+					value="Wielange:"
 					for="period" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.period}"
