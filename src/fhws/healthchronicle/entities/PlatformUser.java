@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "getPlatformUser", query = "SELECT u FROM PlatformUser u WHERE email = :email")
 public class PlatformUser implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -24,10 +26,10 @@ public class PlatformUser implements Serializable
 	private Long weight;
 	private Long height;
 	private Integer birthyear;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "platformUser")
 	private List<Story> stories = new ArrayList<Story>();
-	
+
 	public Long getId()
 	{
 		return id;
