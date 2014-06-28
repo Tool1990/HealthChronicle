@@ -1,15 +1,12 @@
 package fhws.healthchronicle.beans;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityManager;
 
-import fhws.healthchronicle.entities.PlatformUser;
 import fhws.healthchronicle.entities.Story;
 
 @RequestScoped
@@ -20,9 +17,7 @@ public class StoryBean implements Serializable
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
-	
-//	private List<Story> stories;
-	
+
 	private Story story;
 
 	public StoryBean()
@@ -38,29 +33,27 @@ public class StoryBean implements Serializable
 			System.out.println("Not logged in");
 			return "index";
 		}
-		
-//		story.setPlatformUser(session.getPlatformUser());
-//		session.getEm().getTransaction().begin();
-//		session.getEm().persist(story);
-//		session.getEm().getTransaction().commit();
-		
+
 		story.setPlatformUser(session.getPlatformUser());
-		
-		session.getEm().getTransaction().begin();
-		session.getEm().persist(story);
-		session.getEm().getTransaction().commit();
-		
+
+		EntityManager em = session.getEm();
+		em.getTransaction().begin();
+		em.persist(story);
+		em.getTransaction().commit();
+
 		session.getPlatformUser().addStory(story);
 
 		System.out.println("New story ok");
 		return "index";
 	}
 	
-//	public List<Story> gs()
-//	{
-//		Query q = session.getEm().createQuery("SELECT s FROM Story s");
-//		return q.getResultList();
-//	}
+	public String selectStory(Story activeStory)
+	{
+		System.out.println("selectStory()");
+		session.setActiveStory(activeStory);
+		
+		return "show-events?faces-redirect=true";
+	}
 
 	public SessionBean getSession()
 	{
@@ -81,21 +74,4 @@ public class StoryBean implements Serializable
 	{
 		this.story = story;
 	}
-
-//	public List<Story> getStories()
-//	{
-//		System.out.println("getStories");
-//		TypedQuery<Story> query = session.getEm().createNamedQuery("getStories", Story.class);
-//		query.setParameter("userId", session.getPlatformUser().getId());
-//		List<Story> result = query.getResultList();
-//		return result;
-//		
-////		Query q = session.getEm().createQuery("SELECT s FROM Story s");
-////		return q.getResultList();
-//	}
-
-//	public void setStories(List<Story> stories)
-//	{
-//		this.stories = stories;
-//	}
 }

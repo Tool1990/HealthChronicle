@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="title">Neues Event hinzufügen</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<h:panelGrid columns="2">
+				<h:outputLabel
+					for="type"
+					value="Art"></h:outputLabel>
+				<h:selectOneMenu
+					value="#{eventBean.event.type}"
+					id="type">
+					<f:selectItem
+						itemValue="symptom"
+						itemLabel="Symptom" />
+					<f:selectItem
+						itemValue="diagnosis"
+						itemLabel="Diagnose" />
+					<f:selectItem
+						itemValue="protection"
+						itemLabel="Behandlung" />
+					<f:ajax
+						execute="@all"
+						render="@all" />
+				</h:selectOneMenu>
+				<h:outputLabel
+					value="Beschreibung"
+					for="description" />
+				<h:inputText
+					value="#{eventBean.event.description}"
+					id="description" />
+				<h:outputLabel
+					for="date"
+					value="Datum"></h:outputLabel>
+				<h:inputText
+					value="#{eventBean.event.date}"
+					id="date">
+					<f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
+				</h:inputText>
+			</h:panelGrid>
+			<h:panelGrid
+				id="symptom"
+				columns="2">
+				<h:outputLabel
+					value="Körperstelle"
+					for="location" />
+				<h:inputText
+					value="#{eventBean.symptomEvent.location}"
+					id="location" />
+				<h:outputLabel
+					value="Schmerzgrad"
+					for="intensity" />
+				<h:inputText
+					value="#{eventBean.symptomEvent.intensity}"
+					id="intensity" />
+			</h:panelGrid>
+			<h:panelGrid
+				id="diagnosis"
+				columns="2">
+				<h:outputLabel
+					value="Arzt"
+					for="doctor" />
+				<h:inputText
+					value="#{eventBean.diagnosisEvent.doctor}"
+					id="doctor" />
+			</h:panelGrid>
+			<h:panelGrid
+				id="protection"
+				columns="3">
+				<h:outputLabel
+					value="Anzahl pro Einheit"
+					for="quantity" />
+				<h:inputText
+					value="#{eventBean.protectionEvent.quantity}"
+					id="quantity" />
+				<h:selectOneMenu value="#{eventBean.protectionEvent.quantityUnit}">
+					<f:selectItem
+						itemValue="gram"
+						itemLabel="Gramm" />
+					<f:selectItem
+						itemValue="times"
+						itemLabel="Mal" />
+					<f:selectItem
+						itemValue="pieces"
+						itemLabel="Stück" />
+				</h:selectOneMenu>
+				<h:outputLabel
+					value="Abstand pro Einheit"
+					for="interval" />
+				<h:inputText
+					value="#{eventBean.protectionEvent.interval}"
+					id="interval" />
+				<h:selectOneMenu value="#{eventBean.protectionEvent.intervalUnit}">
+					<f:selectItem
+						itemValue="hours"
+						itemLabel="Stunden" />
+					<f:selectItem
+						itemValue="days"
+						itemLabel="Tage" />
+					<f:selectItem
+						itemValue="weeks"
+						itemLabel="Wochen" />
+				</h:selectOneMenu>
+				<h:outputLabel
+					value="Zeitraum"
+					for="period" />
+				<h:inputText
+					value="#{eventBean.protectionEvent.period}"
+					id="period" />
+				<h:selectOneMenu value="#{eventBean.protectionEvent.periodUnit}">
+					<f:selectItem
+						itemValue="hours"
+						itemLabel="Stunden" />
+					<f:selectItem
+						itemValue="days"
+						itemLabel="Tage" />
+					<f:selectItem
+						itemValue="weeks"
+						itemLabel="Wochen" />
+				</h:selectOneMenu>
+			</h:panelGrid>
+			<h:commandButton
+				value="Event anlegen"
+				action="#{eventBean.createEvent}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

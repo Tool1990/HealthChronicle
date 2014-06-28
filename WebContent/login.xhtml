@@ -1,37 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<div class="common-content" id="login">
+		<div
+			class="common-content"
+			id="login">
 			<h:form id="form">
-				<p:panel id="panel" header="Login">
-					<p:messages id="msgs" />
-					<h:panelGrid columns="3">
-						<h:outputLabel for="email" value="E-mail:" />
-						<p:inputText id="email" value="#{sessionBean.platformUser.email}"
-							tabindex="1" required="true" label="E-mail"
-							placeholder="testmail@gmail.com">
-						</p:inputText>
-						<p:message for="email" display="icon" />
-						<h:outputLabel for="password" value="Passwort:" />
-						<p:password id="password" value="#{sessionBean.platformUser.password}"
-							tabindex="2" label="Password" required="true"
-							placeholder="Mindestens 3 Zeichen">
-							<f:validateLength minimum="3" />
-<!-- 							<p:ajax update="msgPassword" event="keyup" /> -->
-						</p:password>
-						<p:message for="password" id="msgPassword" display="icon" />
-					</h:panelGrid>
-					<p:commandButton id="btn" value="Login" update="panel"
-						action="#{loginBean.login}" />
-				</p:panel>
+				<h:panelGrid columns="2">
+					<h:outputLabel
+						for="email"
+						value="E-mail:" />
+					<h:inputText
+						id="email"
+						value="#{sessionBean.platformUser.email}"
+						tabindex="1"
+						required="true"
+						label="E-mail"
+						placeholder="testmail@gmail.com">
+					</h:inputText>
+					<h:outputLabel
+						for="password"
+						value="Passwort:" />
+					<h:inputSecret
+						id="password"
+						value="#{sessionBean.platformUser.password}"
+						tabindex="2"
+						label="Password"
+						required="true"
+						placeholder="Mindestens 3 Zeichen">
+						<f:validateLength minimum="3" />
+					</h:inputSecret>
+					<f:facet name="footer">
+						<h:commandButton
+							id="btn"
+							value="Login"
+							action="#{loginBean.login}" />
+					</f:facet>
+				</h:panelGrid>
 			</h:form>
 		</div>
 	</ui:define>

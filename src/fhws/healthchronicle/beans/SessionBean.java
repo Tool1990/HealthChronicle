@@ -8,19 +8,19 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 
-import org.apache.catalina.Session;
-
 import fhws.healthchronicle.dao.EntityManagerFactoryBean;
 import fhws.healthchronicle.entities.PlatformUser;
+import fhws.healthchronicle.entities.Story;
 
 @SessionScoped
 @ManagedBean
 public class SessionBean implements Serializable
 {
 	private static final long serialVersionUID = 6777774608213533082L;
-	
+
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
+	private Story activeStory;
 
 	@ManagedProperty(value = "#{entityManagerFactoryBean}")
 	private EntityManagerFactoryBean emfBean;
@@ -45,7 +45,7 @@ public class SessionBean implements Serializable
 	public SessionBean()
 	{
 	}
-	
+
 	public void destroy()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -59,7 +59,7 @@ public class SessionBean implements Serializable
 			System.out.println("new PlatformUser");
 			platformUser = new PlatformUser();
 		}
-		
+
 		System.out.println("getPlatformUser()");
 		return platformUser;
 	}
@@ -77,6 +77,16 @@ public class SessionBean implements Serializable
 	public void setLoggedIn(boolean loggedIn)
 	{
 		this.loggedIn = loggedIn;
+	}
+	
+	public Story getActiveStory()
+	{
+		return activeStory;
+	}
+
+	public void setActiveStory(Story activeStory)
+	{
+		this.activeStory = activeStory;
 	}
 
 	public EntityManagerFactoryBean getEmfBean()

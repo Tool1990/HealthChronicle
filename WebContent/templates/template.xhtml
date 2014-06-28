@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title><ui:insert name="title">Health Chronicle</ui:insert></title>
@@ -13,7 +13,11 @@
 
 <h:body>
 	<div id="header">
-		<h:outputLink id="logo" value="index.jsf"><h:outputText value = "Health Chronicle"/></h:outputLink>
+		<h:outputLink
+			id="logo"
+			value="index.jsf">
+			<h:outputText value="Health Chronicle" />
+		</h:outputLink>
 		<div id="nav">
 			<ui:include src="../composites/header.xhtml" />
 		</div>
@@ -21,7 +25,6 @@
 	<div id="content">
 		<ui:insert name="content"></ui:insert>
 	</div>
-	<div id="footer">
-	</div>
+	<div id="footer"></div>
 </h:body>
 </html>

@@ -1,21 +1,27 @@
-
-<h:form xmlns="http://www.w3.org/1999/xhtml"
+<h:form
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core">
 	<ul>
 		<h:panelGroup rendered="#{!sessionBean.loggedIn}">
-			<li><h:outputLink value="login.jsf" title="Login">Log-In</h:outputLink></li>
-			<li><h:outputLink value="registration.jsf"
+			<li><h:outputLink
+					value="login.jsf"
+					title="Login">Log-In</h:outputLink></li>
+			<li><h:outputLink
+					value="registration.jsf"
 					title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
 		</h:panelGroup>
 		<h:panelGroup rendered="#{sessionBean.loggedIn}">
-			<li><h:outputLink value="new-story.jsf"
+			<li><h:outputLink
+					value="new-story.jsf"
 					title="Neuen Krankheitsverlauf anlegen">Neue Story anlegen</h:outputLink></li>
-			<li><h:outputLink value="show-stories.jsf"
+			<li><h:outputLink
+					value="show-stories.jsf"
 					title="Krankheitsverlauf anzeigen">Alle Stories anzeigen</h:outputLink></li>
-			<li><h:commandLink value="Abmelden" action="#{loginBean.logout}"
+			<li><h:commandLink
+					value="Abmelden"
+					action="#{loginBean.logout}"
 					title="Abmelden"></h:commandLink></li>
 		</h:panelGroup>
 	</ul>

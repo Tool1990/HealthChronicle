@@ -9,24 +9,23 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">Krankheitsverlauf einsehen</ui:define>
+	<ui:define name="title">Events anzeigen</ui:define>
 	<ui:define name="content">
-		<h:form>
-			<h:dataTable
-				value="#{sessionBean.platformUser.stories}"
-				var="s">
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-				#{s.id}
+		<h:dataTable
+			value="#{sessionBean.activeStory.events}"
+			var="e">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{e.id}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Inhalt</f:facet>
-					<h:commandLink
-						value="#{s.title}"
-						action="#{storyBean.selectStory(s)}" />
+			<h:column>
+				<f:facet name="header">type</f:facet>
+				#{e.type}
 				</h:column>
-			</h:dataTable>
-		</h:form>
+		</h:dataTable>
+		<h:button
+			value="Neues Ereignis"
+			outcome="new-event" />
 	</ui:define>
 </ui:composition>
 </html>

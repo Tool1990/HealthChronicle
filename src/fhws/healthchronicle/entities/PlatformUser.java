@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,18 +17,17 @@ public class PlatformUser implements Serializable
 	@Id
 	@GeneratedValue
 	private Long id;
-	//@Column(nullable = false)
+	// @Column(nullable = false)
 	private String email;
 	private String password;
 	private Character gender = 'm';
 	private Long weight;
 	private Long height;
-	private Integer birthyear = 1990;
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy="platformUser")
-//	@OneToMany(targetEntity=Story.class, cascade=CascadeType.ALL)
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="platformUser")
+	private Integer birthyear;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "platformUser")
 	private List<Story> stories = new ArrayList<Story>();
-
+	
 	public Long getId()
 	{
 		return id;
@@ -110,7 +108,7 @@ public class PlatformUser implements Serializable
 	{
 		this.stories = stories;
 	}
-	
+
 	public void addStory(Story story)
 	{
 		stories.add(story);

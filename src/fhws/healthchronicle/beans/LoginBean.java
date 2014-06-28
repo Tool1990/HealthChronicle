@@ -1,11 +1,13 @@
 package fhws.healthchronicle.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fhws.healthchronicle.entities.PlatformUser;
@@ -32,18 +34,18 @@ public class LoginBean implements Serializable
 		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
 		query.setParameter("email", session.getPlatformUser().getEmail());
 		List<PlatformUser> resultList = query.getResultList();
-		
+
 		if (resultList != null && resultList.size() == 1 && resultList.get(0).getPassword().equals(session.getPlatformUser().getPassword()))
 		{
 			session.setPlatformUser(resultList.get(0));
-			
-			TypedQuery<Story> queryStory = session.getEm().createNamedQuery("getStories", Story.class);
-			queryStory.setParameter("userId", resultList.get(0).getId());
-			List<Story> result = queryStory.getResultList();
-			session.getPlatformUser().setStories(result);
-			
+
+//			TypedQuery<Story> queryStory = session.getEm().createNamedQuery("getStories", Story.class);
+//			queryStory.setParameter("userId", resultList.get(0).getId());
+//			List<Story> result = queryStory.getResultList();
+//			session.getPlatformUser().setStories(result);
+
 			session.setLoggedIn(true);
-			
+
 			System.out.println("login ok");
 			return "index";
 		}
@@ -61,10 +63,19 @@ public class LoginBean implements Serializable
 
 	public String register()
 	{
-//		session.getPlatformUser().setId(null);
 		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
 		query.setParameter("email", session.getPlatformUser().getEmail());
 		List<PlatformUser> resultList = query.getResultList();
+
+		// new user to refresh id
+		PlatformUser p = new PlatformUser();
+		p.setEmail(session.getPlatformUser().getEmail());
+		p.setPassword(session.getPlatformUser().getPassword());
+		p.setGender(session.getPlatformUser().getGender());
+		p.setWeight(session.getPlatformUser().getWeight());
+		p.setHeight(session.getPlatformUser().getHeight());
+		p.setBirthyear(session.getPlatformUser().getBirthyear());
+		p.setStories(new ArrayList<Story>());
 
 		if (resultList.size() != 0)
 		{
@@ -72,9 +83,10 @@ public class LoginBean implements Serializable
 			return "";
 		}
 
-		session.getEm().getTransaction().begin();
-		session.getEm().persist(session.getPlatformUser());
-		session.getEm().getTransaction().commit();
+		EntityManager em = session.getEm();
+		em.getTransaction().begin();
+		em.persist(p);
+		em.getTransaction().commit();
 
 		System.out.println("registration ok");
 		return "registration-success";
