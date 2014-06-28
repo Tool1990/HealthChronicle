@@ -17,13 +17,17 @@
 				var="s">
 				<h:column>
 					<f:facet name="header">ID</f:facet>
-				#{s.id}
+					<h:outputText value="#{s.id}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">Inhalt</f:facet>
 					<h:commandLink
 						value="#{s.title}"
 						action="#{storyBean.selectStory(s)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Benutzer</f:facet>
+					<h:outputText value="#{s.platformUser.email}" />
 				</h:column>
 			</h:dataTable>
 		</h:form>
