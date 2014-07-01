@@ -102,7 +102,6 @@ public class PlatformUser implements Serializable
 
 	public List<Story> getStories()
 	{
-		System.out.println("getStories()");
 		return stories;
 	}
 

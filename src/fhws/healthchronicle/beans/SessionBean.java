@@ -1,6 +1,7 @@
 package fhws.healthchronicle.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -8,16 +9,19 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 
+import com.google.gson.Gson;
+
 import fhws.healthchronicle.dao.EntityManagerFactoryBean;
+import fhws.healthchronicle.entities.Event;
 import fhws.healthchronicle.entities.PlatformUser;
 import fhws.healthchronicle.entities.Story;
 
 @SessionScoped
-@ManagedBean
+@ManagedBean(name = "sessionBean")
 public class SessionBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 	private Story activeStory;
@@ -28,13 +32,22 @@ public class SessionBean implements Serializable
 
 	public EntityManager getEm()
 	{
-		if (em == null)
-		{
+//		if(em == null)
+//		{
 			em = emfBean.getEntityManager();
-			System.out.println("new entity manager");
-		}
-
-		return em;
+			System.out.println("new entity manager null");
+			return em;
+//		}
+//		
+//		if (!(em.isOpen()))
+//		{
+//			em = emfBean.getEntityManager();
+//			System.out.println("new entity manager not open");
+//			return em;
+//		}
+//
+//		System.out.println("new entity manager cache");
+//		return em;
 	}
 
 	public void setEm(EntityManager em)
@@ -50,6 +63,12 @@ public class SessionBean implements Serializable
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		System.out.println("session destroyed");
+	}
+
+	public String jsonEvents()
+	{
+		List<Event> events = getActiveStory().getEvents();
+		return (events == null) ? "" : new Gson().toJson(events);
 	}
 
 	public PlatformUser getPlatformUser()
@@ -78,7 +97,7 @@ public class SessionBean implements Serializable
 	{
 		this.loggedIn = loggedIn;
 	}
-	
+
 	public Story getActiveStory()
 	{
 		return activeStory;

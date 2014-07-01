@@ -59,7 +59,6 @@ public class EventBean implements Serializable
 
 	public Event formEvent()
 	{
-
 		switch (event.getType())
 		{
 			case "symptom":
