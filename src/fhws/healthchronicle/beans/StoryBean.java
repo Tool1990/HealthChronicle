@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
-import javax.persistence.Persistence;
 
 import fhws.healthchronicle.entities.Story;
 
@@ -44,26 +43,16 @@ public class StoryBean implements Serializable
 		em.persist(story);
 		em.getTransaction().commit();
 
-		session.getPlatformUser().addStory(story);
+		session.getPlatformUser().getStories().add(story);
+		System.out.println("New story created");
 
-		System.out.println("New story ok");
 		return "show-stories?faces-redirect=true";
-	}
-
-	public static void main(String[] args)
-	{
-		EntityManager em = Persistence.createEntityManagerFactory("common-entities").createEntityManager();
-
-		em.getTransaction().begin();
-		Story s = em.find(Story.class, 2l);
-		em.remove(s);
-		em.getTransaction().commit();
 	}
 
 	public String deleteStory(Long storyId)
 	{
 		System.out.println("deleteStory()");
-		
+
 		if (!session.isLoggedIn())
 		{
 			System.out.println("Not logged in");
@@ -89,19 +78,19 @@ public class StoryBean implements Serializable
 
 		return "show-stories?faces-redirect=true";
 	}
-	
+
 	public void deleteStoryById(Long storyId)
 	{
 		int index = 0;
-		
-		for(Story s : session.getPlatformUser().getStories())
+
+		for (Story s : session.getPlatformUser().getStories())
 		{
 			if (s.getId() == storyId)
 			{
 				session.getPlatformUser().getStories().remove(index);
 				return;
 			}
-			
+
 			index++;
 		}
 	}

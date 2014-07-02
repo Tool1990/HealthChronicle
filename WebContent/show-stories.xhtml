@@ -31,7 +31,9 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header"></f:facet>
-					<h:commandLink action="#{storyBean.deleteStory(s.id)}" value="löschen" />
+					<h:commandLink
+						action="#{storyBean.deleteStory(s.id)}"
+						value="löschen" />
 				</h:column>
 			</h:dataTable>
 		</h:form>

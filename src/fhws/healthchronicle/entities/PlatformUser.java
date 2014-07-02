@@ -109,9 +109,4 @@ public class PlatformUser implements Serializable
 	{
 		this.stories = stories;
 	}
-
-	public void addStory(Story story)
-	{
-		stories.add(story);
-	}
 }

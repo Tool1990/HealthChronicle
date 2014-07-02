@@ -55,10 +55,6 @@ public class SessionBean implements Serializable
 		this.em = em;
 	}
 
-	public SessionBean()
-	{
-	}
-
 	public void destroy()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -79,7 +75,6 @@ public class SessionBean implements Serializable
 			platformUser = new PlatformUser();
 		}
 
-		System.out.println("getPlatformUser()");
 		return platformUser;
 	}
 

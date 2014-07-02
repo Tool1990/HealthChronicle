@@ -11,28 +11,36 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="title">Events anzeigen</ui:define>
 	<ui:define name="content">
-		<h:dataTable
-			value="#{sessionBean.activeStory.events}"
-			var="e">
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{e.id}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Typ</f:facet>
-				<h:outputText value="#{e.type}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Beschreibung</f:facet>
-				<h:outputText value="#{e.description}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Datum</f:facet>
-				<h:outputText value="#{e.date}">
-					<f:convertDateTime pattern="dd.MM.yyyy" />
-				</h:outputText>
-			</h:column>
-		</h:dataTable>
+		<h:form>
+			<h:dataTable
+				value="#{sessionBean.activeStory.events}"
+				var="e">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{e.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Typ</f:facet>
+					<h:outputText value="#{e.type}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Beschreibung</f:facet>
+					<h:outputText value="#{eventBean.eventText(e)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Datum</f:facet>
+					<h:outputText value="#{e.date}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:commandLink
+						action="#{eventBean.deleteEvent(e.id)}"
+						value="löschen" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
 		<h:button
 			value="Neues Ereignis"
 			outcome="new-event" />

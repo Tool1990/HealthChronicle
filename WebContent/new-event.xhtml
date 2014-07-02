@@ -32,12 +32,6 @@
 						render="@all" />
 				</h:selectOneMenu>
 				<h:outputLabel
-					value="Beschreibung:"
-					for="description" />
-				<h:inputText
-					value="#{eventBean.event.description}"
-					id="description" />
-				<h:outputLabel
 					for="date"
 					value="Datum:"></h:outputLabel>
 				<h:inputText
@@ -45,25 +39,46 @@
 					id="date">
 					<f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
 				</h:inputText>
+				<h:outputLabel
+					value="Beschreibung:"
+					for="description" />
+				<h:inputText
+					value="#{eventBean.event.description}"
+					id="description" />
 			</h:panelGrid>
 			<h:panelGrid
 				id="symptom"
+				rendered="#{eventBean.event.type == 'symptom'}"
 				columns="2">
-				<h:outputLabel
-					value="Körperstelle:"
-					for="location" />
-				<h:inputText
-					value="#{eventBean.symptomEvent.location}"
-					id="location" />
 				<h:outputLabel
 					value="Schmerzgrad:"
 					for="intensity" />
-				<h:inputText
+				<h:selectOneMenu
 					value="#{eventBean.symptomEvent.intensity}"
-					id="intensity" />
+					id="intensity">
+					<f:selectItem
+						itemValue="0"
+						itemLabel="Kein Schmerz" />
+					<f:selectItem
+						itemValue="1"
+						itemLabel="Kaum spührbar" />
+					<f:selectItem
+						itemValue="2"
+						itemLabel="Unangenehm" />
+					<f:selectItem
+						itemValue="3"
+						itemLabel="Intensiv" />
+					<f:selectItem
+						itemValue="4"
+						itemLabel="Stark" />
+					<f:selectItem
+						itemValue="5"
+						itemLabel="Unerträglich" />
+				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid
 				id="diagnosis"
+				rendered="#{eventBean.event.type == 'diagnosis'}"
 				columns="2">
 				<h:outputLabel
 					value="Arzt:"
@@ -74,6 +89,7 @@
 			</h:panelGrid>
 			<h:panelGrid
 				id="protection"
+				rendered="#{eventBean.event.type == 'protection'}"
 				columns="3">
 				<h:outputLabel
 					value="Wieviel:"
@@ -119,10 +135,10 @@
 						itemValue="weeks"
 						itemLabel="Wochen" />
 					<f:selectItem
-						itemValue="weeks"
+						itemValue="month"
 						itemLabel="Monate" />
 					<f:selectItem
-						itemValue="weeks"
+						itemValue="years"
 						itemLabel="Jahre" />
 				</h:selectOneMenu>
 			</h:panelGrid>

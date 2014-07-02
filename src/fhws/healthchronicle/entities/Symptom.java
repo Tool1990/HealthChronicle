@@ -7,18 +7,7 @@ public class Symptom extends Event
 {
 	private static final long serialVersionUID = 1L;
 
-	private String location;
 	private Integer intensity;
-
-	public String getLocation()
-	{
-		return location;
-	}
-
-	public void setLocation(String location)
-	{
-		this.location = location;
-	}
 
 	public Integer getIntensity()
 	{
