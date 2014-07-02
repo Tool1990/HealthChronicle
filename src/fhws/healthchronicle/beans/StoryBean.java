@@ -24,29 +24,13 @@ public class StoryBean implements Serializable
 
 	public StoryBean()
 	{
-		System.out.println("new Story");
 		story = new Story();
 	}
-
-	public String createStory()
+	
+	public String newStory()
 	{
-		if (!session.isLoggedIn())
-		{
-			System.out.println("Not logged in");
-			return "index?faces-redirect=true";
-		}
-
-		story.setPlatformUser(session.getPlatformUser());
-
-		EntityManager em = session.getEm();
-		em.getTransaction().begin();
-		em.persist(story);
-		em.getTransaction().commit();
-
-		session.getPlatformUser().getStories().add(story);
-		System.out.println("New story created");
-
-		return "show-stories?faces-redirect=true";
+		session.setActiveStory(null);
+		return "new-event?faces-redirect=true";
 	}
 
 	public String deleteStory(Long storyId)
@@ -95,10 +79,10 @@ public class StoryBean implements Serializable
 		}
 	}
 
-	public String selectStory(Story activeStory)
+	public String selectStory(Story s)
 	{
 		System.out.println("selectStory()");
-		session.setActiveStory(activeStory);
+		session.setActiveStory(s);
 
 		return "show-events?faces-redirect=true";
 	}

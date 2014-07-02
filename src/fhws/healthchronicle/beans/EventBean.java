@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import fhws.healthchronicle.entities.Diagnosis;
 import fhws.healthchronicle.entities.Event;
 import fhws.healthchronicle.entities.Protection;
+import fhws.healthchronicle.entities.Story;
 import fhws.healthchronicle.entities.Symptom;
 
 @ViewScoped
@@ -28,7 +29,6 @@ public class EventBean implements Serializable
 
 	public EventBean()
 	{
-		System.out.println("new Event");
 		event = new Event();
 		symptomEvent = new Symptom();
 		diagnosisEvent = new Diagnosis();
@@ -37,12 +37,26 @@ public class EventBean implements Serializable
 
 	public String createEvent()
 	{
-		System.out.println("createEvent()");
-
 		if (!session.isLoggedIn())
 		{
 			System.out.println("Not logged in");
 			return "index";
+		}
+		
+		if (session.getActiveStory() == null)
+		{
+			Story story = new Story();
+			story.setTitle(event.getDescription());
+			story.setPlatformUser(session.getPlatformUser());
+
+			EntityManager em = session.getEm();
+			em.getTransaction().begin();
+			em.persist(story);
+			em.getTransaction().commit();
+
+			session.setActiveStory(story);
+			session.getPlatformUser().getStories().add(story);
+			System.out.println("New story created");
 		}
 
 		event = formEvent();

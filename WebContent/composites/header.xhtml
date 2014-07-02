@@ -13,9 +13,9 @@
 					title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
 		</h:panelGroup>
 		<h:panelGroup rendered="#{sessionBean.loggedIn}">
-			<li><h:outputLink
-					value="new-story.jsf"
-					title="Krankheit anlegen">Krankheit anlegen</h:outputLink></li>
+			<li><h:commandLink
+					action="#{storyBean.newStory}"
+					value="Krankheit anlegen"/></li>
 			<li><h:outputLink
 					value="show-stories.jsf"
 					title="Krankheitsverlauf">Krankheitsverlauf</h:outputLink></li>
