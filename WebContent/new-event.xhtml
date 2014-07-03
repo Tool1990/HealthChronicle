@@ -10,6 +10,7 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="title">Neues Event hinzufügen</ui:define>
 	<ui:define name="content">
+	<h2>Neuen Krankheitsverlauf anlegen</h2>
 		<h:form id="form">
 			<h:panelGrid columns="2">
 				<h:outputLabel
@@ -143,7 +144,7 @@
 				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:commandButton
-				value="Event anlegen"
+				value="Anlegen"
 				action="#{eventBean.createEvent}" />
 		</h:form>
 	</ui:define>

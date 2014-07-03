@@ -10,8 +10,12 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 		<div id="template">
-			<h:outputText value="#{sessionBean.platformUser.email}" />
-			Willkommen bei Health Chronicle
+			<h2>
+				Willkommen bei Health Chronicle
+				<h:outputText
+					rendered="#{sessionBean.platformUser.email != null}"
+					value=", #{sessionBean.platformUser.email}" />
+			</h2>
 		</div>
 	</ui:define>
 </ui:composition>
