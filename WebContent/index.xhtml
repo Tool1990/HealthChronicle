@@ -9,9 +9,9 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<div id="template">
+		<div>
 			<h2>
-				Willkommen bei Health Chronicle
+				<h:outputText value="#{string.welcome}" />
 				<h:outputText
 					rendered="#{sessionBean.platformUser.email != null}"
 					value=", #{sessionBean.platformUser.email}" />

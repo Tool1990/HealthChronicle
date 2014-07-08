@@ -9,9 +9,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">Events anzeigen</ui:define>
+	<ui:define name="title">#{string.title_show_events}</ui:define>
 	<ui:define name="content">
-	<h2>Krankheitsverlauf</h2>
+		<h2>#{string.title_show_events}</h2>
 		<h:form>
 			<h:dataTable
 				value="#{sessionBean.activeStory.events}"
@@ -21,15 +21,36 @@
 					<h:outputText value="#{e.id}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">Typ</f:facet>
+					<f:facet name="header">#{string.column_type}</f:facet>
 					<h:outputText value="#{e.type}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">Beschreibung</f:facet>
-					<h:outputText value="#{eventBean.eventText(e)}" />
+					<f:facet name="header">#{string.column_content}</f:facet>
+					<h:outputFormat
+						value="#{string.symptom_text}"
+						rendered="#{e.type == 'SYMPTOM'}">
+						<f:param value="#{e.description}" />
+						<f:param value="#{string[eventBean.castToSymptom(e).intensity.label]}" />
+					</h:outputFormat>
+					<h:outputFormat
+						value="#{string.diagnosis_text}"
+						rendered="#{e.type == 'DIAGNOSIS'}">
+						<f:param value="#{e.description}" />
+						<f:param value="#{eventBean.castToDiagnosis(e).doctor}" />
+					</h:outputFormat>
+					<h:outputFormat
+						value="#{string.protection_text}"
+						rendered="#{e.type == 'PROTECTION'}">
+						<f:param value="#{eventBean.castToProtection(e).quantity}" />
+						<f:param value="#{string[eventBean.castToProtection(e).quantityUnit.label]}" />
+						<f:param value="#{e.description}" />
+						<f:param value="#{string[eventBean.castToProtection(e).intervalUnit.label]}" />
+						<f:param value="#{eventBean.castToProtection(e).period}" />
+						<f:param value="#{string[eventBean.castToProtection(e).periodUnit.label]}" />
+					</h:outputFormat>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Datum</f:facet>
+					<f:facet name="header">#{string.column_date}</f:facet>
 					<h:outputText value="#{e.date}">
 						<f:convertDateTime pattern="dd.MM.yyyy" />
 					</h:outputText>
@@ -38,12 +59,12 @@
 					<f:facet name="header"></f:facet>
 					<h:commandLink
 						action="#{eventBean.deleteEvent(e.id)}"
-						value="löschen" />
+						value="#{string.link_delete}" />
 				</h:column>
 			</h:dataTable>
 		</h:form>
 		<h:button
-			value="Neues Ereignis"
+			value="#{string.button_new_event}"
 			outcome="new-event" />
 	</ui:define>
 </ui:composition>

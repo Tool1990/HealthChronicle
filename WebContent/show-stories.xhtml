@@ -9,9 +9,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">Krankheitsverlauf einsehen</ui:define>
+	<ui:define name="title">#{string.title_show_stories}</ui:define>
 	<ui:define name="content">
-	<h2>Alle Krankheitsverläufe</h2>
+		<h2>#{string.title_show_stories}</h2>
 		<h:form>
 			<h:dataTable
 				value="#{sessionBean.platformUser.stories}"
@@ -21,20 +21,20 @@
 					<h:outputText value="#{s.id}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">Inhalt</f:facet>
+					<f:facet name="header">#{string.column_content}</f:facet>
 					<h:commandLink
 						value="#{s.title}"
 						action="#{storyBean.selectStory(s)}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">Benutzer</f:facet>
+					<f:facet name="header">#{string.column_user}</f:facet>
 					<h:outputText value="#{s.platformUser.email}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:commandLink
 						action="#{storyBean.deleteStory(s.id)}"
-						value="löschen" />
+						value="#{string.link_delete}" />
 				</h:column>
 			</h:dataTable>
 		</h:form>

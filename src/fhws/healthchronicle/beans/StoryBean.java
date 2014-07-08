@@ -26,7 +26,7 @@ public class StoryBean implements Serializable
 	{
 		story = new Story();
 	}
-	
+
 	public String newStory()
 	{
 		session.setActiveStory(null);

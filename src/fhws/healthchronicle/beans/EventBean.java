@@ -42,7 +42,7 @@ public class EventBean implements Serializable
 			System.out.println("Not logged in");
 			return "index";
 		}
-		
+
 		if (session.getActiveStory() == null)
 		{
 			Story story = new Story();
@@ -71,108 +71,38 @@ public class EventBean implements Serializable
 		return "show-events?faces-redirect=true";
 	}
 
-	public String eventText(Event e)
+	public Symptom castToSymptom(Event e)
 	{
-		switch (e.getType())
-		{
-			case "symptom":
-				symptomEvent = (Symptom) e;
-				return symptomEvent.getDescription() + ": " + getPainText(symptomEvent.getIntensity());
-			case "diagnosis":
-				diagnosisEvent = (Diagnosis) e;
-				return diagnosisEvent.getDescription() + " wurde  von " + diagnosisEvent.getDoctor() + " diagnostiziert";
-			case "protection":
-				protectionEvent = (Protection) e;
-				return protectionEvent.getDescription() + ": " + protectionEvent.getQuantity() + " " + getQuantityUnitText(protectionEvent.getQuantityUnit()) + " " + getIntervalUnitText(protectionEvent.getIntervalUnit()) + " für " + protectionEvent.getPeriod() + " " + getPeriodUnitText(protectionEvent.getPeriodUnit());
-			default:
-				throw new IllegalArgumentException();
-		}
+		return (Symptom) e;
 	}
 
-	public String getPeriodUnitText(String unit)
+	public Diagnosis castToDiagnosis(Event e)
 	{
-		switch (unit)
-		{
-			case "days":
-				return "Tage";
-			case "weeks":
-				return "Wochen";
-			case "month":
-				return "Monate";
-			case "years":
-				return "Jahre";
-			default:
-				throw new IllegalArgumentException();
-		}
+		return (Diagnosis) e;
 	}
 
-	public String getQuantityUnitText(String unit)
+	public Protection castToProtection(Event e)
 	{
-		switch (unit)
-		{
-			case "gram":
-				return "Gramm";
-			case "times":
-				return "mal";
-			case "pieces":
-				return "Stück";
-			default:
-				throw new IllegalArgumentException();
-		}
-	}
-
-	public String getIntervalUnitText(String unit)
-	{
-		switch (unit)
-		{
-			case "hours":
-				return "stündlich";
-			case "days":
-				return "täglich";
-			case "weeks":
-				return "wöchentlich";
-			default:
-				throw new IllegalArgumentException();
-		}
-	}
-
-	public String getPainText(Integer intensity)
-	{
-		switch (intensity)
-		{
-			case 0:
-				return "Kein Schmerz";
-			case 2:
-				return "Schmerz kaum spührbar";
-			case 3:
-				return "Unangenehmer Schmerz";
-			case 4:
-				return "Intensiver Schmerz";
-			case 5:
-				return "Unerträglicher Schmerz";
-			default:
-				throw new IllegalArgumentException();
-		}
+		return (Protection) e;
 	}
 
 	public Event formEvent()
 	{
 		switch (event.getType())
 		{
-			case "symptom":
+			case SYMPTOM:
 				symptomEvent.setStory(session.getActiveStory());
 				symptomEvent.setDescription(event.getDescription());
 				symptomEvent.setDate(event.getDate());
 				symptomEvent.setType(event.getType());
 				return symptomEvent;
-			case "diagnosis":
+			case DIAGNOSIS:
 				diagnosisEvent.setStory(session.getActiveStory());
 				diagnosisEvent.setDescription(event.getDescription());
 				diagnosisEvent.setDate(event.getDate());
 				diagnosisEvent.setType(event.getType());
-				System.out.println(diagnosisEvent.getDoctor());
 				return diagnosisEvent;
-			case "protection":
+			case PROTECTION:
 				protectionEvent.setStory(session.getActiveStory());
 				protectionEvent.setDescription(event.getDescription());
 				protectionEvent.setDate(event.getDate());

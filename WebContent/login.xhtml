@@ -12,7 +12,7 @@
 		<div
 			class="common-content"
 			id="login">
-			<h2>Login</h2>
+			<h2>#{string.login}</h2>
 			<h:form id="form">
 				<h:panelGrid columns="2">
 					<h:outputLabel
@@ -23,8 +23,7 @@
 						value="#{sessionBean.platformUser.email}"
 						tabindex="1"
 						required="true"
-						label="E-mail"
-						placeholder="testmail@gmail.com">
+						placeholder="#{string.email_placeholder}">
 					</h:inputText>
 					<h:outputLabel
 						for="password"
@@ -33,18 +32,18 @@
 						id="password"
 						value="#{sessionBean.platformUser.password}"
 						tabindex="2"
-						label="Password"
 						required="true"
-						placeholder="Mindestens 3 Zeichen">
+						placeholder="#{string.password_placeholder}">
 						<f:validateLength minimum="3" />
 					</h:inputSecret>
 					<f:facet name="footer">
 						<h:commandButton
 							id="btn"
-							value="Login"
+							value="#{string.login}"
 							action="#{loginBean.login}" />
 					</f:facet>
 				</h:panelGrid>
+				<h:messages style="color:red;" />
 			</h:form>
 		</div>
 	</ui:define>

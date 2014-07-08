@@ -8,40 +8,36 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">Neues Event hinzufügen</ui:define>
+	<ui:define name="title">#{string.title_new_event}</ui:define>
 	<ui:define name="content">
-	<h2>Neuen Krankheitsverlauf anlegen</h2>
+		<h2>#{string.title_new_event}</h2>
 		<h:form id="form">
 			<h:panelGrid columns="2">
 				<h:outputLabel
 					for="type"
-					value="Art:"></h:outputLabel>
+					value="#{string.label_type}" />
 				<h:selectOneMenu
 					value="#{eventBean.event.type}"
 					id="type">
-					<f:selectItem
-						itemValue="symptom"
-						itemLabel="Symptom" />
-					<f:selectItem
-						itemValue="diagnosis"
-						itemLabel="Diagnose" />
-					<f:selectItem
-						itemValue="protection"
-						itemLabel="Behandlung" />
+					<f:selectItems
+						value="#{eventBean.event.eventTypes}"
+						var="type"
+						itemValue="#{type}"
+						itemLabel="#{string[type.label]}" />
 					<f:ajax
 						execute="@all"
 						render="@all" />
 				</h:selectOneMenu>
 				<h:outputLabel
 					for="date"
-					value="Datum:"></h:outputLabel>
+					value="#{string.label_date}" />
 				<h:inputText
 					value="#{eventBean.event.date}"
 					id="date">
-					<f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
+					<f:convertDateTime pattern="dd.MM.yyyy" />
 				</h:inputText>
 				<h:outputLabel
-					value="Beschreibung:"
+					value="#{string.label_description}"
 					for="description" />
 				<h:inputText
 					value="#{eventBean.event.description}"
@@ -49,40 +45,27 @@
 			</h:panelGrid>
 			<h:panelGrid
 				id="symptom"
-				rendered="#{eventBean.event.type == 'symptom'}"
+				rendered="#{eventBean.event.type == 'SYMPTOM'}"
 				columns="2">
 				<h:outputLabel
-					value="Schmerzgrad:"
+					value="#{string.label_intensity}"
 					for="intensity" />
 				<h:selectOneMenu
 					value="#{eventBean.symptomEvent.intensity}"
 					id="intensity">
-					<f:selectItem
-						itemValue="0"
-						itemLabel="Kein Schmerz" />
-					<f:selectItem
-						itemValue="1"
-						itemLabel="Kaum spührbar" />
-					<f:selectItem
-						itemValue="2"
-						itemLabel="Unangenehm" />
-					<f:selectItem
-						itemValue="3"
-						itemLabel="Intensiv" />
-					<f:selectItem
-						itemValue="4"
-						itemLabel="Stark" />
-					<f:selectItem
-						itemValue="5"
-						itemLabel="Unerträglich" />
+					<f:selectItems
+						value="#{eventBean.symptomEvent.intensities}"
+						var="intensity"
+						itemValue="#{intensity}"
+						itemLabel="#{string[intensity.label]}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid
 				id="diagnosis"
-				rendered="#{eventBean.event.type == 'diagnosis'}"
+				rendered="#{eventBean.event.type == 'DIAGNOSIS'}"
 				columns="2">
 				<h:outputLabel
-					value="Arzt:"
+					value="#{string.label_doctor}"
 					for="doctor" />
 				<h:inputText
 					value="#{eventBean.diagnosisEvent.doctor}"
@@ -90,61 +73,46 @@
 			</h:panelGrid>
 			<h:panelGrid
 				id="protection"
-				rendered="#{eventBean.event.type == 'protection'}"
+				rendered="#{eventBean.event.type == 'PROTECTION'}"
 				columns="3">
 				<h:outputLabel
-					value="Wieviel:"
+					value="#{string.label_quantity}"
 					for="quantity" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.quantity}"
 					id="quantity" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.quantityUnit}">
-					<f:selectItem
-						itemValue="gram"
-						itemLabel="Gramm" />
-					<f:selectItem
-						itemValue="times"
-						itemLabel="Mal" />
-					<f:selectItem
-						itemValue="pieces"
-						itemLabel="Stück" />
+					<f:selectItems
+						value="#{eventBean.protectionEvent.quantityUnits}"
+						var="quantityUnit"
+						itemValue="#{quantityUnit}"
+						itemLabel="#{string[quantityUnit.label]}" />
 				</h:selectOneMenu>
-				<h:outputLabel value="Pro:" />
+				<h:outputLabel value="#{string.label_interval_unit}" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.intervalUnit}">
-					<f:selectItem
-						itemValue="hours"
-						itemLabel="Stunde" />
-					<f:selectItem
-						itemValue="days"
-						itemLabel="Tag" />
-					<f:selectItem
-						itemValue="weeks"
-						itemLabel="Woche" />
+					<f:selectItems
+						value="#{eventBean.protectionEvent.intervalUnits}"
+						var="intervalUnit"
+						itemValue="#{intervalUnit}"
+						itemLabel="#{string[intervalUnit.label]}" />
 				</h:selectOneMenu>
 				<!-- placeholder -->
 				<h:outputLabel
-					value="Wielange:"
+					value="#{string.label_period}"
 					for="period" />
 				<h:inputText
 					value="#{eventBean.protectionEvent.period}"
 					id="period" />
 				<h:selectOneMenu value="#{eventBean.protectionEvent.periodUnit}">
-					<f:selectItem
-						itemValue="days"
-						itemLabel="Tage" />
-					<f:selectItem
-						itemValue="weeks"
-						itemLabel="Wochen" />
-					<f:selectItem
-						itemValue="month"
-						itemLabel="Monate" />
-					<f:selectItem
-						itemValue="years"
-						itemLabel="Jahre" />
+					<f:selectItems
+						value="#{eventBean.protectionEvent.periodUnits}"
+						var="periodUnit"
+						itemValue="#{periodUnit}"
+						itemLabel="#{string[periodUnit.label]}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:commandButton
-				value="Anlegen"
+				value="#{string.button_create_event}"
 				action="#{eventBean.createEvent}" />
 		</h:form>
 	</ui:define>

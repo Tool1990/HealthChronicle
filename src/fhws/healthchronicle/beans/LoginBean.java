@@ -39,10 +39,11 @@ public class LoginBean implements Serializable
 		{
 			session.setPlatformUser(resultList.get(0));
 
-//			TypedQuery<Story> queryStory = session.getEm().createNamedQuery("getStories", Story.class);
-//			queryStory.setParameter("userId", resultList.get(0).getId());
-//			List<Story> result = queryStory.getResultList();
-//			session.getPlatformUser().setStories(result);
+			// TypedQuery<Story> queryStory =
+			// session.getEm().createNamedQuery("getStories", Story.class);
+			// queryStory.setParameter("userId", resultList.get(0).getId());
+			// List<Story> result = queryStory.getResultList();
+			// session.getPlatformUser().setStories(result);
 
 			session.setLoggedIn(true);
 

@@ -5,27 +5,21 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<ul>
 		<h:panelGroup rendered="#{!sessionBean.loggedIn}">
-			<li><h:outputLink
-					value="login.jsf"
-					title="Login">Login</h:outputLink></li>
+			<li><h:outputLink value="login.jsf">#{string.login}</h:outputLink></li>
 			<li><h:outputLink
 					value="registration.jsf"
-					title="Hier kommen Sie zur Registrierung">Registrieren</h:outputLink></li>
+					title="#{string.signup_title}">#{string.signup}</h:outputLink></li>
 		</h:panelGroup>
 		<h:panelGroup rendered="#{sessionBean.loggedIn}">
 			<li><h:commandLink
 					action="#{storyBean.newStory}"
-					value="Krankheit anlegen"/></li>
-			<li><h:outputLink
-					value="show-stories.jsf"
-					title="Krankheitsverlauf">Krankheitsverlauf</h:outputLink></li>
-			<li><h:outputLink
-					value="conference.jsf"
-					title="Videokonferenz starten">Videochat</h:outputLink></li>
+					value="#{string.apply_disease}" /></li>
+			<li><h:outputLink value="show-stories.jsf">#{string.disease_progress}</h:outputLink></li>
+			<li><h:outputLink value="conference.jsf">#{string.videochat}</h:outputLink></li>
+			<li><h:outputLink value="options.jsf">#{string.options}</h:outputLink></li>
 			<li><h:commandLink
-					value="Abmelden"
-					action="#{loginBean.logout}"
-					title="Abmelden"></h:commandLink></li>
+					value="#{string.logout}"
+					action="#{loginBean.logout}"></h:commandLink></li>
 		</h:panelGroup>
 	</ul>
 </h:form>

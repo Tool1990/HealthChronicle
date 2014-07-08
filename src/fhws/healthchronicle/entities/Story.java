@@ -68,7 +68,7 @@ public class Story implements Serializable
 	{
 		this.events = events;
 	}
-	
+
 	public void addEvent(Event event)
 	{
 		this.events.add(event);

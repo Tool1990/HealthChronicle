@@ -2,7 +2,9 @@ package fhws.healthchronicle.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -25,29 +27,25 @@ public class SessionBean implements Serializable
 	private PlatformUser platformUser;
 	private boolean loggedIn = false;
 	private Story activeStory;
+	private String localeCode = "en";
 
 	@ManagedProperty(value = "#{entityManagerFactoryBean}")
 	private EntityManagerFactoryBean emfBean;
 	private EntityManager em;
 
+	@PostConstruct
+	public void init()
+	{
+		Locale lang = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(lang);
+		setLocaleCode(lang.getLanguage());
+	}
+
 	public EntityManager getEm()
 	{
-//		if(em == null)
-//		{
-			em = emfBean.getEntityManager();
-			System.out.println("new entity manager null");
-			return em;
-//		}
-//		
-//		if (!(em.isOpen()))
-//		{
-//			em = emfBean.getEntityManager();
-//			System.out.println("new entity manager not open");
-//			return em;
-//		}
-//
-//		System.out.println("new entity manager cache");
-//		return em;
+		em = emfBean.getEntityManager();
+		System.out.println("new entity manager");
+		return em;
 	}
 
 	public void setEm(EntityManager em)
@@ -58,6 +56,7 @@ public class SessionBean implements Serializable
 	public void destroy()
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		// setLoggedIn(false);
 		System.out.println("session destroyed");
 	}
 
@@ -111,5 +110,15 @@ public class SessionBean implements Serializable
 	public void setEmfBean(EntityManagerFactoryBean emfBean)
 	{
 		this.emfBean = emfBean;
+	}
+
+	public String getLocaleCode()
+	{
+		return localeCode;
+	}
+
+	public void setLocaleCode(String localeCode)
+	{
+		this.localeCode = localeCode;
 	}
 }

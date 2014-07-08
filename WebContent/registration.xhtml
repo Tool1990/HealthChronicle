@@ -8,25 +8,24 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">Neuen Benutzer anlegen</ui:define>
+	<ui:define name="title">#{string.title_registration}</ui:define>
 	<ui:define name="content">
 		<div
 			class="common-content"
 			id="login">
-			<h2>Registrierung</h2>
+			<h2>#{string.title_registration}</h2>
 			<h:form id="form">
 				<h:panelGrid columns="2">
 					<h:outputLabel
 						for="email"
-						value="E-mail: " />
+						value="#{string.label_email}" />
 					<h:inputText
 						id="email"
 						value="#{sessionBean.platformUser.email}"
 						tabindex="1"
 						required="true"
-						label="E-mail"
-						placeholder="MaxMuster@gmail.com"
-						validatorMessage="Ungültige E-Mail-Adresse, bitte versuchen Sie es erneut">
+						placeholder="#{string.email_placeholder}"
+						validatorMessage="#{string.validate_email}">
 						<f:validateLength minimum="5" />
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -34,59 +33,59 @@
 					</h:inputText>
 					<h:outputLabel
 						for="password"
-						value="Passwort: *" />
+						value="#{string.label_password}" />
 					<h:inputSecret
 						id="password"
 						value="#{sessionBean.platformUser.password}"
 						tabindex="2"
-						label="Password"
 						required="true"
-						placeholder="min. 3 Zeichen">
+						placeholder="#{string.placeholder_password}">
 						<f:validateLength minimum="3" />
 						<f:validateRequired />
 					</h:inputSecret>
 				</h:panelGrid>
 				<h:selectOneRadio value="#{sessionBean.platformUser.gender}">
 					<f:selectItem
-						itemLabel="Männlich"
+						itemLabel="#{string.label_male}"
 						itemValue="m" />
 					<f:selectItem
-						itemLabel="Weiblich"
+						itemLabel="#{string.label_female}"
 						itemValue="f" />
 				</h:selectOneRadio>
 				<h:panelGrid columns="2">
 					<h:outputLabel
 						for="birthyear"
-						value="Geburtsjahr:" />
+						value="#{string.label_birthyear}" />
 					<h:inputText
 						id="birthyear"
 						value="#{sessionBean.platformUser.birthyear}"
 						pattern="^[0-9]{4}$"
-						placeholder="1990">
+						placeholder="#{string.placeholder_birthyear}">
 						<f:validateLength
 							minimum="4"
 							maximum="4" />
 					</h:inputText>
 					<h:outputLabel
 						for="weight"
-						value="Gewicht:" />
+						value="#{string.label_weight}" />
 					<h:inputText
 						id="weight"
 						value="#{sessionBean.platformUser.weight}"
 						required="false"
-						placeholder="in kg" />
+						placeholder="#{string.placeholder_weight}" />
 					<h:outputLabel
 						for="height"
-						value="Größe:" />
+						value="#{string.label_height}" />
 					<h:inputText
 						id="height"
 						value="#{sessionBean.platformUser.height}"
 						required="false"
-						placeholder="in cm" />
+						placeholder="#{string.placeholder_height}" />
 				</h:panelGrid>
 				<h:commandButton
-					value="Registrieren"
+					value="#{string.button_register}"
 					action="#{loginBean.register}" />
+				<h:messages style="color:red;" />
 			</h:form>
 		</div>
 	</ui:define>

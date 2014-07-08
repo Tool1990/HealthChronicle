@@ -8,9 +8,10 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
+	<ui:define name="title">#{string.registration_success}</ui:define>
 	<ui:define name="content">
 		<div class="common-content">
-			<h2>Ihre Registration war erfolgreich. Sie können sich nun einloggen.</h2>
+			<h2>#{string.registration_success}</h2>
 		</div>
 	</ui:define>
 </ui:composition>
