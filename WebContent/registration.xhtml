@@ -25,11 +25,7 @@
 						tabindex="1"
 						required="true"
 						placeholder="#{string.email_placeholder}"
-						validatorMessage="#{string.validate_email}">
-						<f:validateLength minimum="5" />
-						<f:validateRegex
-							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-						<f:validateRequired />
+						validator="#{loginBean.validateEmail}">
 					</h:inputText>
 					<h:outputLabel
 						for="password"
@@ -39,9 +35,8 @@
 						value="#{sessionBean.platformUser.password}"
 						tabindex="2"
 						required="true"
-						placeholder="#{string.placeholder_password}">
-						<f:validateLength minimum="3" />
-						<f:validateRequired />
+						placeholder="#{string.placeholder_password}"
+						validator="#{loginBean.validatePassword}">
 					</h:inputSecret>
 				</h:panelGrid>
 				<h:selectOneRadio value="#{sessionBean.platformUser.gender}">
@@ -59,8 +54,10 @@
 					<h:inputText
 						id="birthyear"
 						value="#{sessionBean.platformUser.birthyear}"
+						tabindex="3"
 						pattern="^[0-9]{4}$"
-						placeholder="#{string.placeholder_birthyear}">
+						placeholder="#{string.placeholder_birthyear}"
+						validatorMessage="#{string.validate_birthyear}">
 						<f:validateLength
 							minimum="4"
 							maximum="4" />
@@ -71,6 +68,7 @@
 					<h:inputText
 						id="weight"
 						value="#{sessionBean.platformUser.weight}"
+						tabindex="4"
 						required="false"
 						placeholder="#{string.placeholder_weight}" />
 					<h:outputLabel
@@ -79,6 +77,7 @@
 					<h:inputText
 						id="height"
 						value="#{sessionBean.platformUser.height}"
+						tabindex="5"
 						required="false"
 						placeholder="#{string.placeholder_height}" />
 				</h:panelGrid>
