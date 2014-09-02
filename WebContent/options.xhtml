@@ -25,6 +25,21 @@
 				</h:selectOneMenu>
 			</h:panelGrid>
 		</h:form>
+		<h:form>
+			<h:outputLabel
+				value="#{string.label_change_password}"
+				for="change_password" />
+			<h:inputSecret
+				id="change_password"
+				value="#{loginBean.newPassword}"
+				required="true"
+				placeholder="#{string.placeholder_password}"
+				validator="#{loginBean.validatePassword}" />
+			<h:commandButton
+				value="#{string.button_change_password}"
+				action="#{loginBean.changePassword}" />
+			<h:messages style="color:red;" />
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

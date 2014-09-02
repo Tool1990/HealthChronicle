@@ -27,6 +27,11 @@ public class LoginBean implements Serializable
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
+	
+	@ManagedProperty("#{string.error_login}")
+	private String errorLogin;
+
+	private String newPassword;
 
 	public LoginBean()
 	{
@@ -49,9 +54,13 @@ public class LoginBean implements Serializable
 			System.out.println("login ok");
 			return "index";
 		}
-		
+
 		System.out.println("login fail");
-		throw new ValidatorException(new FacesMessage("Wrong password or E-Mail"));
+		
+		
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorLogin));
+		return "";
 	}
 
 	public String logout()
@@ -82,14 +91,30 @@ public class LoginBean implements Serializable
 		System.out.println("registration ok");
 		return "registration-success";
 	}
-
+	
+	public String changePassword()
+	{
+		EntityManager em = session.getEm();
+		PlatformUser pSession = session.getPlatformUser();
+		Long id = pSession.getId();
+		PlatformUser p = em.find(PlatformUser.class, id);
+		
+		em.getTransaction().begin();
+		p.setPassword(newPassword);
+		em.getTransaction().commit();
+		
+		pSession.setPassword(newPassword);
+		
+		return "password-success";
+	}
+	
 	public void validateEmail(FacesContext context, UIComponent component, Object value) throws ValidatorException
 	{
 		final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		
+
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		Matcher matcher = pattern.matcher(value.toString());
-		
+
 		if (!matcher.matches())
 		{
 			throw new ValidatorException(new FacesMessage("Enter valid E-Mail format"));
@@ -104,7 +129,7 @@ public class LoginBean implements Serializable
 			throw new ValidatorException(new FacesMessage("Email already exists"));
 		}
 	}
-	
+
 	public void validatePassword(FacesContext context, UIComponent component, Object value) throws ValidatorException
 	{
 		if (value.toString().length() < 3)
@@ -121,5 +146,25 @@ public class LoginBean implements Serializable
 	public void setSession(SessionBean session)
 	{
 		this.session = session;
+	}
+
+	public String getNewPassword()
+	{
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword)
+	{
+		this.newPassword = newPassword;
+	}
+	
+	public String getErrorLogin()
+	{
+		return errorLogin;
+	}
+
+	public void setErrorLogin(String errorLogin)
+	{
+		this.errorLogin = errorLogin;
 	}
 }
