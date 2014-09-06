@@ -47,6 +47,7 @@ public class EventBean implements Serializable
 		{
 			Story story = new Story();
 			story.setTitle(event.getDescription());
+			story.setCured(false);
 			story.setPlatformUser(session.getPlatformUser());
 
 			EntityManager em = session.getEm();

@@ -62,6 +62,14 @@
 						value="#{string.link_delete}" />
 				</h:column>
 			</h:dataTable>
+			<h:outputLabel
+				for="cured"
+				value="#{string.cure_state_change}" />
+			<h:selectBooleanCheckbox
+				id="cured"
+				value="#{sessionBean.activeStory.cured}"
+				onchange="submit()"
+				valueChangeListener="#{storyBean.switchCureState}" />
 		</h:form>
 		<h:button
 			value="#{string.button_new_event}"
