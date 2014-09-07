@@ -49,7 +49,6 @@ public class Event implements Serializable
 		return EventType.values();
 	}
 
-	private String description;
 	private Date date = new Date();
 
 	@ManyToOne
@@ -73,16 +72,6 @@ public class Event implements Serializable
 	public void setType(EventType type)
 	{
 		this.type = type;
-	}
-
-	public String getDescription()
-	{
-		return description;
-	}
-
-	public void setDescription(String description)
-	{
-		this.description = description;
 	}
 
 	public Date getDate()

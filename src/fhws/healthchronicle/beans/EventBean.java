@@ -46,7 +46,7 @@ public class EventBean implements Serializable
 		if (session.getActiveStory() == null)
 		{
 			Story story = new Story();
-			story.setTitle(event.getDescription());
+			story.setTitle(symptomEvent.getSymptomText());
 			story.setCured(false);
 			story.setPlatformUser(session.getPlatformUser());
 
@@ -93,19 +93,16 @@ public class EventBean implements Serializable
 		{
 			case SYMPTOM:
 				symptomEvent.setStory(session.getActiveStory());
-				symptomEvent.setDescription(event.getDescription());
 				symptomEvent.setDate(event.getDate());
 				symptomEvent.setType(event.getType());
 				return symptomEvent;
 			case DIAGNOSIS:
 				diagnosisEvent.setStory(session.getActiveStory());
-				diagnosisEvent.setDescription(event.getDescription());
 				diagnosisEvent.setDate(event.getDate());
 				diagnosisEvent.setType(event.getType());
 				return diagnosisEvent;
 			case PROTECTION:
 				protectionEvent.setStory(session.getActiveStory());
-				protectionEvent.setDescription(event.getDescription());
 				protectionEvent.setDate(event.getDate());
 				protectionEvent.setType(event.getType());
 				return protectionEvent;
