@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-	xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
@@ -13,14 +12,19 @@
 	</h:head>
 
 	<h:body>
-		<div id="header">
-			<h:outputLink
+		<div class="clearfix">
+			<div id="header">
+				<div id="logo">
+					<a href="index.jsf">Health Chronicle</a>
+				</div>
+				<div id="nav">
+					<ui:include src="../composites/header.xhtml" />
+				</div>
+				<!--  <h:outputLink
 				id="logo"
 				value="index.jsf">
 				<h:outputText value="Health Chronicle" />
-			</h:outputLink>
-			<div id="nav">
-				<ui:include src="../composites/header.xhtml" />
+			</h:outputLink>-->
 			</div>
 		</div>
 		<div id="content">
