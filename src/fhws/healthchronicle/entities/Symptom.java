@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 public class Symptom extends Event
 {
 	private static final long serialVersionUID = 1L;
+	
+	private String symptomText;
 
 	@Enumerated(EnumType.ORDINAL)
 	private Intensity intensity = Intensity.INTENSITY_0;
@@ -42,5 +44,15 @@ public class Symptom extends Event
 	public void setIntensity(Intensity intensity)
 	{
 		this.intensity = intensity;
+	}
+	
+	public String getSymptomText()
+	{
+		return symptomText;
+	}
+
+	public void setSymptomText(String symptomText)
+	{
+		this.symptomText = symptomText;
 	}
 }

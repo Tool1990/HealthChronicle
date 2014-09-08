@@ -22,6 +22,7 @@ public class Story implements Serializable
 	@GeneratedValue
 	private Long id;
 	private String title;
+	private Boolean cured;
 
 	@ManyToOne
 	private PlatformUser platformUser;
@@ -47,6 +48,22 @@ public class Story implements Serializable
 	public void setTitle(String title)
 	{
 		this.title = title;
+	}
+	
+	public Boolean isCured()
+	{
+		return cured;
+	}
+	
+	//needed for selectBooleanCheckbox
+	public Boolean getCured()
+	{
+		return cured;
+	}
+
+	public void setCured(Boolean cured)
+	{
+		this.cured = cured;
 	}
 
 	public PlatformUser getPlatformUser()

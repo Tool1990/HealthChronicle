@@ -3,10 +3,16 @@ package fhws.healthchronicle.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -21,6 +27,11 @@ public class LoginBean implements Serializable
 
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean session;
+	
+	@ManagedProperty("#{string.error_login}")
+	private String errorLogin;
+
+	private String newPassword;
 
 	public LoginBean()
 	{
@@ -38,13 +49,6 @@ public class LoginBean implements Serializable
 		if (resultList != null && resultList.size() == 1 && resultList.get(0).getPassword().equals(session.getPlatformUser().getPassword()))
 		{
 			session.setPlatformUser(resultList.get(0));
-
-			// TypedQuery<Story> queryStory =
-			// session.getEm().createNamedQuery("getStories", Story.class);
-			// queryStory.setParameter("userId", resultList.get(0).getId());
-			// List<Story> result = queryStory.getResultList();
-			// session.getPlatformUser().setStories(result);
-
 			session.setLoggedIn(true);
 
 			System.out.println("login ok");
@@ -52,7 +56,11 @@ public class LoginBean implements Serializable
 		}
 
 		System.out.println("login fail");
-		return "login-failed";
+		
+		
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorLogin));
+		return "";
 	}
 
 	public String logout()
@@ -64,10 +72,6 @@ public class LoginBean implements Serializable
 
 	public String register()
 	{
-		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
-		query.setParameter("email", session.getPlatformUser().getEmail());
-		List<PlatformUser> resultList = query.getResultList();
-
 		// new user to refresh id
 		PlatformUser p = new PlatformUser();
 		p.setEmail(session.getPlatformUser().getEmail());
@@ -78,19 +82,60 @@ public class LoginBean implements Serializable
 		p.setBirthyear(session.getPlatformUser().getBirthyear());
 		p.setStories(new ArrayList<Story>());
 
-		if (resultList.size() != 0)
-		{
-			System.out.println("registration failed");
-			return "";
-		}
-
 		EntityManager em = session.getEm();
+
 		em.getTransaction().begin();
 		em.persist(p);
 		em.getTransaction().commit();
 
 		System.out.println("registration ok");
 		return "registration-success";
+	}
+	
+	public String changePassword()
+	{
+		EntityManager em = session.getEm();
+		PlatformUser pSession = session.getPlatformUser();
+		Long id = pSession.getId();
+		PlatformUser p = em.find(PlatformUser.class, id);
+		
+		em.getTransaction().begin();
+		p.setPassword(newPassword);
+		em.getTransaction().commit();
+		
+		pSession.setPassword(newPassword);
+		
+		return "password-success";
+	}
+	
+	public void validateEmail(FacesContext context, UIComponent component, Object value) throws ValidatorException
+	{
+		final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		Matcher matcher = pattern.matcher(value.toString());
+
+		if (!matcher.matches())
+		{
+			throw new ValidatorException(new FacesMessage("Enter valid E-Mail format"));
+		}
+
+		TypedQuery<PlatformUser> query = session.getEm().createNamedQuery("getPlatformUser", PlatformUser.class);
+		query.setParameter("email", value.toString());
+		List<PlatformUser> resultList = query.getResultList();
+
+		if (resultList.size() != 0)
+		{
+			throw new ValidatorException(new FacesMessage("Email already exists"));
+		}
+	}
+
+	public void validatePassword(FacesContext context, UIComponent component, Object value) throws ValidatorException
+	{
+		if (value.toString().length() < 3)
+		{
+			throw new ValidatorException(new FacesMessage("Password too short"));
+		}
 	}
 
 	public SessionBean getSession()
@@ -101,5 +146,25 @@ public class LoginBean implements Serializable
 	public void setSession(SessionBean session)
 	{
 		this.session = session;
+	}
+
+	public String getNewPassword()
+	{
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword)
+	{
+		this.newPassword = newPassword;
+	}
+	
+	public String getErrorLogin()
+	{
+		return errorLogin;
+	}
+
+	public void setErrorLogin(String errorLogin)
+	{
+		this.errorLogin = errorLogin;
 	}
 }

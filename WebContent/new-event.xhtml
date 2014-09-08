@@ -36,17 +36,17 @@
 					id="date">
 					<f:convertDateTime pattern="dd.MM.yyyy" />
 				</h:inputText>
-				<h:outputLabel
-					value="#{string.label_description}"
-					for="description" />
-				<h:inputText
-					value="#{eventBean.event.description}"
-					id="description" />
 			</h:panelGrid>
 			<h:panelGrid
 				id="symptom"
 				rendered="#{eventBean.event.type == 'SYMPTOM'}"
 				columns="2">
+				<h:outputLabel
+					value="#{string.label_symptom_text}"
+					for="symptom_text" />
+				<h:inputText
+					value="#{eventBean.symptomEvent.symptomText}"
+					id="symptom_text" />
 				<h:outputLabel
 					value="#{string.label_intensity}"
 					for="intensity" />
@@ -65,6 +65,18 @@
 				rendered="#{eventBean.event.type == 'DIAGNOSIS'}"
 				columns="2">
 				<h:outputLabel
+					value="#{string.label_classification}"
+					for="classification" />
+				<h:inputText
+					value="#{eventBean.diagnosisEvent.classification}"
+					id="classification" />
+				<h:outputLabel
+					value="#{string.label_diagnosis_text}"
+					for="diagnosis_text" />
+				<h:inputText
+					value="#{eventBean.diagnosisEvent.diagnosisText}"
+					id="diagnosis_text" />
+				<h:outputLabel
 					value="#{string.label_doctor}"
 					for="doctor" />
 				<h:inputText
@@ -75,6 +87,13 @@
 				id="protection"
 				rendered="#{eventBean.event.type == 'PROTECTION'}"
 				columns="3">
+				<h:outputLabel
+					value="#{string.label_protection_text}"
+					for="protection_text" />
+				<h:inputText
+					value="#{eventBean.protectionEvent.protectionText}"
+					id="protection_text" />
+				<!-- placeholder -->
 				<h:outputLabel
 					value="#{string.label_quantity}"
 					for="quantity" />

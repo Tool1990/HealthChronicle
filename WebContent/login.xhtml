@@ -17,7 +17,7 @@
 				<h:panelGrid columns="2">
 					<h:outputLabel
 						for="email"
-						value="E-mail:" />
+						value="#{string.label_email}" />
 					<h:inputText
 						id="email"
 						value="#{sessionBean.platformUser.email}"
@@ -27,14 +27,13 @@
 					</h:inputText>
 					<h:outputLabel
 						for="password"
-						value="Passwort:" />
+						value="#{string.label_password}" />
 					<h:inputSecret
 						id="password"
 						value="#{sessionBean.platformUser.password}"
 						tabindex="2"
 						required="true"
 						placeholder="#{string.password_placeholder}">
-						<f:validateLength minimum="3" />
 					</h:inputSecret>
 					<f:facet name="footer">
 						<h:commandButton

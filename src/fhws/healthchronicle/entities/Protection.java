@@ -8,7 +8,8 @@ import javax.persistence.Enumerated;
 public class Protection extends Event
 {
 	private static final long serialVersionUID = 1L;
-
+	
+	private String protectionText;
 	private Float quantity;
 
 	@Enumerated(EnumType.STRING)
@@ -136,5 +137,15 @@ public class Protection extends Event
 	public void setPeriodUnit(PeriodUnit periodUnit)
 	{
 		this.periodUnit = periodUnit;
+	}
+
+	public String getProtectionText()
+	{
+		return protectionText;
+	}
+
+	public void setProtectionText(String protectionText)
+	{
+		this.protectionText = protectionText;
 	}
 }

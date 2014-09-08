@@ -29,13 +29,14 @@
 					<h:outputFormat
 						value="#{string.symptom_text}"
 						rendered="#{e.type == 'SYMPTOM'}">
-						<f:param value="#{e.description}" />
+						<f:param value="#{eventBean.castToSymptom(e).symptomText}" />
 						<f:param value="#{string[eventBean.castToSymptom(e).intensity.label]}" />
 					</h:outputFormat>
 					<h:outputFormat
 						value="#{string.diagnosis_text}"
 						rendered="#{e.type == 'DIAGNOSIS'}">
-						<f:param value="#{e.description}" />
+						<f:param value="#{eventBean.castToDiagnosis(e).classification}" />
+						<f:param value="#{eventBean.castToDiagnosis(e).diagnosisText}" />
 						<f:param value="#{eventBean.castToDiagnosis(e).doctor}" />
 					</h:outputFormat>
 					<h:outputFormat
@@ -43,7 +44,7 @@
 						rendered="#{e.type == 'PROTECTION'}">
 						<f:param value="#{eventBean.castToProtection(e).quantity}" />
 						<f:param value="#{string[eventBean.castToProtection(e).quantityUnit.label]}" />
-						<f:param value="#{e.description}" />
+						<f:param value="#{eventBean.castToProtection(e).protectionText}" />
 						<f:param value="#{string[eventBean.castToProtection(e).intervalUnit.label]}" />
 						<f:param value="#{eventBean.castToProtection(e).period}" />
 						<f:param value="#{string[eventBean.castToProtection(e).periodUnit.label]}" />
@@ -62,6 +63,14 @@
 						value="#{string.link_delete}" />
 				</h:column>
 			</h:dataTable>
+			<h:outputLabel
+				for="cured"
+				value="#{string.cure_state_change}" />
+			<h:selectBooleanCheckbox
+				id="cured"
+				value="#{sessionBean.activeStory.cured}"
+				onchange="submit()"
+				valueChangeListener="#{storyBean.switchCureState}" />
 		</h:form>
 		<h:button
 			value="#{string.button_new_event}"

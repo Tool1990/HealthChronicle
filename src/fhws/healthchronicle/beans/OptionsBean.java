@@ -38,6 +38,7 @@ public class OptionsBean implements Serializable
 			if (entry.getValue().toString().equals(newLocaleValue))
 			{
 				FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) entry.getValue());
+				return;
 			}
 		}
 	}

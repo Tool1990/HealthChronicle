@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
 
@@ -52,7 +53,7 @@ public class StoryBean implements Serializable
 			em.remove(s);
 			em.getTransaction().commit();
 
-			deleteStoryById(storyId);
+			deleteStoryFromSession(storyId);
 		}
 		catch (Exception e)
 		{
@@ -63,7 +64,7 @@ public class StoryBean implements Serializable
 		return "show-stories?faces-redirect=true";
 	}
 
-	public void deleteStoryById(Long storyId)
+	public void deleteStoryFromSession(Long storyId)
 	{
 		int index = 0;
 
@@ -85,6 +86,42 @@ public class StoryBean implements Serializable
 		session.setActiveStory(s);
 
 		return "show-events?faces-redirect=true";
+	}
+	
+	public void switchCureState(ValueChangeEvent event)
+	{
+		if (!session.isLoggedIn())
+		{
+			System.out.println("Not logged in");
+			return;
+		}
+		
+		EntityManager em = session.getEm();
+		Long storyId = session.getActiveStory().getId();
+		Story s = em.find(Story.class, storyId);
+
+		try
+		{
+			em.getTransaction().begin();
+			
+			if ((Boolean) event.getNewValue() == true)
+			{
+				s.setCured(true);
+				session.getActiveStory().setCured(true);
+			}
+			else
+			{
+				s.setCured(false);
+				session.getActiveStory().setCured(false);
+			}
+			
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
 	}
 
 	public SessionBean getSession()
