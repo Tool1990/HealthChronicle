@@ -14,7 +14,7 @@ a:visited {
 }
 
 a:hover {
-	color: #696969;
+	color: #00FF00;
 	text-decoration: none;
 }
 
@@ -27,12 +27,10 @@ body {
 }
 
 #header {
-	height: 150px;
+	height: 130px;
 	width: 100%;
 	z-index: 10;
 	background: #708090;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	letter-spacing: 4px;
 	margin: o auto;
 	padding: 0;
 	border-bottom: solid;
@@ -42,12 +40,12 @@ body {
 #logo {
 	float: left;
 	font-size: 250%;
-	padding-top: 50px;
+	padding-top: 40px;
 	padding-bottom: 10px;
 	font-weight: bolder;
 	font-size: 250%;
 	font-size: 250%;
-	margin-left: 20px;
+	margin-left: 40px;
 }
 
 #logo a {
@@ -55,18 +53,17 @@ body {
 }
 
 #logo a:hover {
-	color: #696969;
+	color: #00FF00;
 }
 
 #nav ul {
-	letter-spacing: 1.5px;
 	float: right;
 	z-index: 50;
 	overflow: hidden;
 	font-size: 20px;
 	display: inline-block;
 	vertical-align: top;
-	margin: 60px 14px 14px 50px;
+	margin: 50px 14px 14px 40px;
 	z-index: 10;
 }
 
@@ -82,17 +79,19 @@ body {
 }
 
 #nav ul li a:hover {
-	color: #696969;
+	color: #00FF00;
 }
 
 #content {
 	font-size: 17px;
 	padding-top: 30px;
-	margin-left: 20px;
-	letter-spacing: 1px;
-	padding-top: 30px;
+	margin-left: 40px;
 }
 
+#content h2 {
+	color: #00FF00;
+	font-size: 170%;
+}
 table,input,select {
 	font-size: 17px;
 	margin-left: 5px;
@@ -103,12 +102,14 @@ table,thead {
 	margin-left: 5px;
 }
 
-table,thead, tr, th {
+table,thead,tr,th {
 	margin-left: 5px;
 }
-table, label{
+
+table,label {
 	margin-left: 0;
 }
+
 .clearfix:before,.clearfix:after {
 	content: " ";
 	display: table;
