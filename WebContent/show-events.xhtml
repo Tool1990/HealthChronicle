@@ -75,6 +75,14 @@
 		<h:button
 			value="#{string.button_new_event}"
 			outcome="new-event" />
+		<div>
+			#{statisticBean.calculateSymptomDiagnosisStatistic()}
+			<h:outputFormat value="#{string.symptom_diagnosis_statistic}" rendered="#{statisticBean.symptomDiagnosisStatistic.symptomText != null}">
+				<f:param value="#{statisticBean.symptomDiagnosisStatistic.percentage}" />
+				<f:param value="#{statisticBean.symptomDiagnosisStatistic.symptomText}" />
+				<f:param value="#{statisticBean.symptomDiagnosisStatistic.diagnosisText}" />
+			</h:outputFormat>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

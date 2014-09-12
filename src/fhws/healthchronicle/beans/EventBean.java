@@ -1,17 +1,21 @@
 package fhws.healthchronicle.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import fhws.healthchronicle.entities.Diagnosis;
+import fhws.healthchronicle.entities.DiagnosisCounter;
 import fhws.healthchronicle.entities.Event;
 import fhws.healthchronicle.entities.Protection;
 import fhws.healthchronicle.entities.Story;
 import fhws.healthchronicle.entities.Symptom;
+import fhws.healthchronicle.entities.SymptomCounter;
 
 @ViewScoped
 @ManagedBean
@@ -50,10 +54,7 @@ public class EventBean implements Serializable
 			story.setCured(false);
 			story.setPlatformUser(session.getPlatformUser());
 
-			EntityManager em = session.getEm();
-			em.getTransaction().begin();
-			em.persist(story);
-			em.getTransaction().commit();
+			persistObject(story);
 
 			session.setActiveStory(story);
 			session.getPlatformUser().getStories().add(story);
@@ -61,32 +62,14 @@ public class EventBean implements Serializable
 		}
 
 		event = formEvent();
-
-		EntityManager em = session.getEm();
-		em.getTransaction().begin();
-		em.persist(event);
-		em.getTransaction().commit();
+		persistObject(event);
+		incrementCounter();
 
 		session.getActiveStory().addEvent(event);
 
 		return "show-events?faces-redirect=true";
 	}
-
-	public Symptom castToSymptom(Event e)
-	{
-		return (Symptom) e;
-	}
-
-	public Diagnosis castToDiagnosis(Event e)
-	{
-		return (Diagnosis) e;
-	}
-
-	public Protection castToProtection(Event e)
-	{
-		return (Protection) e;
-	}
-
+	
 	public Event formEvent()
 	{
 		switch (event.getType())
@@ -108,6 +91,101 @@ public class EventBean implements Serializable
 				return protectionEvent;
 			default:
 				return event;
+		}
+	}
+
+	public void persistObject(Object o)
+	{
+		EntityManager em = session.getEm();
+		em.getTransaction().begin();
+		em.persist(o);
+		em.getTransaction().commit();
+	}
+
+	public void incrementCounter()
+	{
+		switch (event.getType())
+		{
+			case SYMPTOM:
+				incrementSymptomCounter();				
+				return;
+
+			case DIAGNOSIS:
+				incrementDiagnosisCounter();				
+				return;
+
+			case PROTECTION:
+
+				return;
+
+			default:
+				return;
+		}
+	}
+	
+	public void incrementSymptomCounter()
+	{
+		EntityManager em = session.getEm();
+		
+		String sql = "SELECT sc FROM SymptomCounter sc WHERE sc.symptomText = :symptomText";
+		Query query = em.createQuery(sql);
+		query.setParameter("symptomText", symptomEvent.getSymptomText());
+		SymptomCounter symptomCounter;
+		
+		if (query.getResultList().size() > 0)
+		{
+			Long id = ((SymptomCounter) query.getResultList().get(0)).getId();
+			symptomCounter = em.find(SymptomCounter.class, id);
+			
+			em.getTransaction().begin();
+			symptomCounter.setCounter(symptomCounter.getCounter()+1);
+			em.getTransaction().commit();
+		}
+		else
+		{
+			symptomCounter = new SymptomCounter();
+			symptomCounter.setSymptomText(symptomEvent.getSymptomText());
+			symptomCounter.setCounter(1);
+			
+			persistObject(symptomCounter);
+		}
+	}
+	
+	public void incrementDiagnosisCounter()
+	{
+		EntityManager em = session.getEm();
+		Symptom firstSymptom = (Symptom) session.getActiveStory().getEvents().get(0);
+		
+		String DiagnosisCounterSql = "SELECT dc FROM DiagnosisCounter dc WHERE dc.diagnosisText = :diagnosisText AND dc.symptomCounter.symptomText = :symptomText";
+		Query diagnosisCounterQuery = em.createQuery(DiagnosisCounterSql);
+		diagnosisCounterQuery.setParameter("diagnosisText", diagnosisEvent.getDiagnosisText());
+		diagnosisCounterQuery.setParameter("symptomText", firstSymptom.getSymptomText());
+		List<DiagnosisCounter>diagnosisCounterList = diagnosisCounterQuery.getResultList();
+		DiagnosisCounter diagnosisCounter;
+		
+		String SymptomCounterSql = "SELECT sc FROM SymptomCounter sc WHERE sc.symptomText = :symptomText";
+		Query SymptomCounterQuery = em.createQuery(SymptomCounterSql);
+		SymptomCounterQuery.setParameter("symptomText", firstSymptom.getSymptomText());
+		Long symptomCounterId = ((SymptomCounter) SymptomCounterQuery.getResultList().get(0)).getId();
+		SymptomCounter symptomCounter = em.find(SymptomCounter.class, symptomCounterId);
+		
+		if (diagnosisCounterList.size() > 0)
+		{
+			Long diagnosisCounterId = diagnosisCounterList.get(0).getId();
+			diagnosisCounter = em.find(DiagnosisCounter.class, diagnosisCounterId);
+			
+			em.getTransaction().begin();
+			diagnosisCounter.setCounter(diagnosisCounter.getCounter()+1);
+			em.getTransaction().commit();
+		}
+		else
+		{
+			diagnosisCounter = new DiagnosisCounter();
+			diagnosisCounter.setDiagnosisText(diagnosisEvent.getDiagnosisText());
+			diagnosisCounter.setCounter(1);
+			diagnosisCounter.setSymptomCounter(symptomCounter);
+			
+			persistObject(diagnosisCounter);
 		}
 	}
 
@@ -155,6 +233,21 @@ public class EventBean implements Serializable
 
 			index++;
 		}
+	}
+
+	public Symptom castToSymptom(Event e)
+	{
+		return (Symptom) e;
+	}
+
+	public Diagnosis castToDiagnosis(Event e)
+	{
+		return (Diagnosis) e;
+	}
+
+	public Protection castToProtection(Event e)
+	{
+		return (Protection) e;
 	}
 
 	public Symptom getSymptomEvent()
