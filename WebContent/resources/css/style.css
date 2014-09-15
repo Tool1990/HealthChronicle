@@ -122,6 +122,10 @@ table,label {
 	*zoom: 1;
 }
 
+.list {
+	list-style: none;	
+}
+
 #footer {
 	float: left;
 	width: 100%;
@@ -129,7 +133,3 @@ table,label {
 	padding-left: 40px;
 	margin-top: 40px;
 }
-
-
-
-
