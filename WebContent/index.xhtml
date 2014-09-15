@@ -8,10 +8,11 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
+	<ui:define name="title">#{string.title_index}</ui:define>
 	<ui:define name="content">
 		<div>
 			<h2>
-				<h:outputText value="#{string.welcome}" />
+				<h:outputText value="#{string.title_index}" />
 				<h:outputText
 					rendered="#{sessionBean.platformUser.email != null}"
 					value=", #{sessionBean.platformUser.email}" />

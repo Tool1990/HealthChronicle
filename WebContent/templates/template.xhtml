@@ -1,12 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <f:view locale="#{sessionBean.localeCode}">
 	<h:head>
-		<title><ui:insert name="title">Health Chronicle</ui:insert></title>
+		<title><ui:insert name="title" /></title>
 		<h:outputStylesheet name="css/style.css" />
 		<ui:insert name="script" />
 	</h:head>
@@ -15,22 +16,27 @@
 		<div class="clearfix">
 			<div id="header">
 				<div id="logo">
-					<a href="index.jsf">Health Chronicle</a>
+					<h:outputLink
+						id="logoLink"
+						value="index.jsf">
+						<h:outputText value="#{string.title}" />
+					</h:outputLink>
 				</div>
 				<div id="nav">
 					<ui:include src="../composites/header.xhtml" />
 				</div>
-				<!--  <h:outputLink
-				id="logo"
-				value="index.jsf">
-				<h:outputText value="Health Chronicle" />
-			</h:outputLink>-->
 			</div>
 		</div>
 		<div id="content">
 			<ui:insert name="content"></ui:insert>
 		</div>
-		<div id="footer"></div>
+		<div id="footer">
+			<h:outputLink
+				id="impressum"
+				value="impressum.jsf">
+				<h:outputText value="#{string.title_impressum}" />
+			</h:outputLink>
+		</div>
 	</h:body>
 </f:view>
 </html>

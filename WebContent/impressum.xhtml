@@ -8,10 +8,12 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
-	<ui:define name="title">#{string.title_password_success}</ui:define>
+	<ui:define name="title">#{string.title_impressum}</ui:define>
 	<ui:define name="content">
-		<div class="common-content">
-			<h2>#{string.password_success}</h2>
+		<div>
+			<h2>
+				<h:outputText value="#{string.title_impressum}" />
+			</h2>
 		</div>
 	</ui:define>
 </ui:composition>

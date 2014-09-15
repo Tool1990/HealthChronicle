@@ -8,11 +8,12 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/templates/template.xhtml">
+	<ui:define name="title">#{string.title_login}</ui:define>
 	<ui:define name="content">
 		<div
 			class="common-content"
 			id="login">
-			<h2>#{string.login}</h2>
+			<h2>#{string.title_login}</h2>
 			<h:form id="form">
 				<h:panelGrid columns="2">
 					<h:outputLabel
