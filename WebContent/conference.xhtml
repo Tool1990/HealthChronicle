@@ -11,8 +11,7 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="title">Krankheitsverlauf einsehen</ui:define>
 	<ui:define name="content">
-		<iframe src="http://212.227.251.32?u=#{sessionBean.platformUser.email}" width=100% height=100%
-        frameborder="0" scrolling="no"></iframe>
+		<iframe style="overflow:hidden;" src="http://212.227.251.32?u=#{sessionBean.platformUser.email}" width="100%" height="3000" frameborder="0" scrolling="no"></iframe>
 	</ui:define>
 </ui:composition>
 </html>
