@@ -57,7 +57,7 @@ public class EventBean implements Serializable
 			persistObject(story);
 
 			session.setActiveStory(story);
-			session.getPlatformUser().getStories().add(story);
+			
 			System.out.println("New story created");
 		}
 
