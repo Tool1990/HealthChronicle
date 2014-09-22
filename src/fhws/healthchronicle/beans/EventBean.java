@@ -57,6 +57,9 @@ public class EventBean implements Serializable
 			persistObject(story);
 
 			session.setActiveStory(story);
+
+			//detach all managed entities to reload when called
+			session.getEm().clear();
 			
 			System.out.println("New story created");
 		}

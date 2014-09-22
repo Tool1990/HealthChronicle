@@ -55,10 +55,7 @@ public class LoginBean implements Serializable
 			return "index";
 		}
 
-		System.out.println("login fail");
-		
-		
-		
+		System.out.println("login fail");		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorLogin));
 		return "";
 	}

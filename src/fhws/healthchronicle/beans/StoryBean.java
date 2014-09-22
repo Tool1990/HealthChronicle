@@ -31,7 +31,7 @@ public class StoryBean implements Serializable
 	public String newStory()
 	{
 		session.setActiveStory(null);
-		return "new-event?faces-redirect=true";
+		return "new-story?faces-redirect=true";
 	}
 
 	public String deleteStory(Long storyId)
