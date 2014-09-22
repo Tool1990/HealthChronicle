@@ -201,7 +201,22 @@ public class EventBean implements Serializable
 			System.out.println("Not logged in");
 			return "index?faces-redirect=true";
 		}
+		System.out.println(session.getActiveStory().getEvents().size());
+		deleteEventTransaction(eventId);
+		
+		if (session.getActiveStory().getEvents().size() < 1)
+		{
+			StoryBean storyBean = new StoryBean();
+			storyBean.setSession(session);
+			storyBean.deleteStory(session.getActiveStory().getId());
+			return "show-stories?faces-redirect=true";
+		}
 
+		return "show-events?faces-redirect=true";
+	}
+	
+	public void deleteEventTransaction(Long eventId)
+	{
 		EntityManager em = session.getEm();
 
 		try
@@ -218,8 +233,6 @@ public class EventBean implements Serializable
 			e.printStackTrace();
 			em.getTransaction().rollback();
 		}
-
-		return "show-events?faces-redirect=true";
 	}
 
 	public void deleteEventById(Long eventId)

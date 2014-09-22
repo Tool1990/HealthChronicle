@@ -60,7 +60,7 @@ public class StoryBean implements Serializable
 			e.printStackTrace();
 			em.getTransaction().rollback();
 		}
-
+		
 		return "show-stories?faces-redirect=true";
 	}
 

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import fhws.healthchronicle.entities.DiagnosisCounter;
+import fhws.healthchronicle.entities.Event;
 import fhws.healthchronicle.entities.Symptom;
 import fhws.healthchronicle.helper.SymptomDiagnosisStatistic;
 
@@ -25,7 +26,16 @@ public class StatisticBean
 	{
 		symptomDiagnosisStatistic = new SymptomDiagnosisStatistic();
 
-		Symptom firstSymptom = (Symptom) session.getActiveStory().getEvents().get(0);
+		Event firstEvent = session.getActiveStory().getEvents().get(0);
+		
+		if (firstEvent.getType() != Event.EventType.SYMPTOM)
+		{
+			symptomDiagnosisStatistic = null;
+			return;
+		}
+			
+		Symptom firstSymptom = (Symptom) firstEvent;
+		
 		String firstsymptomText = firstSymptom.getSymptomText();
 
 		String sql = "SELECT dc FROM DiagnosisCounter dc WHERE dc.symptomCounter.symptomText = :symptomText ORDER BY dc.counter DESC";
